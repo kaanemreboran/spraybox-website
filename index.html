@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spraybox | Otomotiv Sarf Malzemeleri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #12294D;
+    --blue: #1E56A0;
+    --blue-light: #4C8DDA;
+    --red: #D31E25;
+    --steel: #EDEFF2;
+    --steel-dark: #D8DCE1;
+    --asphalt: #1B1D21;
+    --gold: #C89B3C;
+    --white: #FFFFFF;
+    --text-muted: #5B6472;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--steel);
+    color: var(--asphalt);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .mono { font-family: 'Roboto Mono', monospace; }
+
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  img { max-width: 100%; display: block; }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header {
+    background: var(--white);
+    border-bottom: 3px solid var(--blue);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+  }
+
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-wrap img {
+    height: 48px;
+    width: auto;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  nav a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--navy);
+    transition: color 0.15s;
+  }
+
+  nav a:hover { color: var(--blue); }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .icon-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    background: var(--steel);
+    color: var(--navy);
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+  }
+
+  .cart-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 4px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.15s;
+  }
+
+  .btn-primary { background: var(--blue); color: var(--white); }
+  .btn-primary:hover { background: var(--navy); }
+
+  .btn-outline { border-color: var(--navy); color: var(--navy); background: transparent; }
+  .btn-outline:hover { background: var(--navy); color: var(--white); }
+
+  .btn-whatsapp { background: #25D366; color: var(--white); }
+  .btn-whatsapp:hover { background: #1EB955; }
+
+  /* ---------- SWEEP DIVIDER (imza öğesi) ---------- */
+  .sweep {
+    height: 46px;
+    width: 100%;
+    display: block;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: var(--asphalt);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    padding: 76px 0 96px;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(115deg, transparent 58%, var(--blue) 58.4%, var(--blue) 60%, var(--blue-light) 60.4%, var(--blue-light) 61%, transparent 61.4%);
+    opacity: 0.9;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 620px;
+  }
+
+  .eyebrow {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue-light);
+    margin-bottom: 18px;
+    display: block;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+    line-height: 1.12;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 span { color: var(--blue-light); }
+
+  .hero p {
+    font-size: 16px;
+    color: #C9CDD3;
+    max-width: 460px;
+    margin-bottom: 32px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stats {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 40px;
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid #33363c;
+    max-width: 620px;
+  }
+
+  .hero-stats div strong {
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px;
+    display: block;
+    color: var(--blue-light);
+  }
+
+  .hero-stats div span {
+    font-size: 13px;
+    color: #9AA0A8;
+  }
+
+  /* ---------- KAMPANYA BANNER ---------- */
+  .campaign {
+    background: var(--red);
+    color: var(--white);
+    padding: 16px 0;
+  }
+
+  .campaign .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .campaign-text {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  .campaign-text .tag {
+    background: var(--white);
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- SECTION HEADER ---------- */
+  .section { padding: 72px 0; }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .section-head .eyebrow { color: var(--blue); }
+  .section-head h2 { font-size: 30px; color: var(--navy); }
+  .section-head p { color: var(--text-muted); font-size: 15px; max-width: 420px; }
+
+  /* ---------- KATEGORİLER ---------- */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .cat-card {
+    background: var(--white);
+    border: 1px solid var(--steel-dark);
+    border-radius: 8px;
+    padding: 28px 22px;
+    transition: transform 0.15s, border-color 0.15s;
+    cursor: pointer;
+  }
+
+  .cat-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--blue);
+  }
+
+  .cat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    background: var(--steel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: var(--blue);
+    margin-bottom: 18px;
+  }
+
+  .cat-card h3 {
+    font-size: 16px;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .cat-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: none;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ---------- ÜRÜNLER (placeholder) ---------- */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+  }
+
+  .product-card {
+    background: var(--white);
+    border: 1px solid var(--steel-dark);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .product-thumb {
+    height: 160px;
+    background: linear-gradient(135deg, var(--steel) 0%, var(--steel-dark) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-family: 'Roboto Mono', monospace;
+  }
+
+  .product-body { padding: 18px; }
+
+  .product-body .cat-label {
+    font-size: 11px;
+    color: var(--blue);
+    font-family: 'Roboto Mono', monospace;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .product-body h3 {
+    font-family: 'Inter', sans-serif;
+    text-transform: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .product-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .price {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--navy);
+  }
+
+  .price span {
+    font-size: 11px;
+    color: var(--text-muted);
+    display: block;
+    font-weight: 400;
+  }
+
+  .add-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  /* ---------- NEDEN SPRAYBOX ---------- */
+  .why {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .why .section-head .eyebrow { color: var(--blue-light); }
+  .why .section-head h2 { color: var(--white); }
+  .why .section-head p { color: #B7C1CE; }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 28px;
+  }
+
+  .why-item {
+    border-left: 3px solid var(--blue-light);
+    padding-left: 18px;
+  }
+
+  .why-item .num {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--blue-light);
+    font-size: 13px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .why-item h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+
+  .why-item p {
+    font-size: 14px;
+    color: #B7C1CE;
+    text-transform: none;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ---------- İLETİŞİM CTA ---------- */
+  .contact-cta {
+    background: var(--blue);
+    color: var(--white);
+    padding: 56px 0;
+  }
+
+  .contact-cta .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .contact-cta h2 { font-size: 26px; margin-bottom: 8px; }
+  .contact-cta p { color: #D9E6F5; text-transform: none; font-family: 'Inter', sans-serif; }
+
+  .contact-numbers {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .contact-numbers a {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 15px;
+    background: rgba(255,255,255,0.12);
+    padding: 10px 16px;
+    border-radius: 6px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--asphalt);
+    color: #8A8F97;
+    padding: 40px 0 24px;
+    font-size: 13px;
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-bottom: 24px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #2B2E33;
+  }
+
+  .footer-top img { height: 34px; margin-bottom: 10px; }
+
+  .footer-cols {
+    display: flex;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+
+  .footer-cols h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #C9CDD3;
+    margin-bottom: 12px;
+  }
+
+  .footer-cols li { margin-bottom: 8px; }
+  .footer-cols a:hover { color: var(--blue-light); }
+
+  /* ---------- WHATSAPP FLOAT ---------- */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    background: #25D366;
+    color: var(--white);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    z-index: 200;
+    cursor: pointer;
+  }
+
+  @media (max-width: 860px) {
+    nav { display: none; }
+    .hero h1 { font-size: 32px; }
+    .hero::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <img src="assets/spraybox_logo_full.png" alt="Spraybox Otomotiv Sarf Malzemeleri">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Anasayfa</a></li>
+        <li><a href="#kategoriler">Ürünler</a></li>
+        <li><a href="#kampanya">Kampanyalar</a></li>
+        <li><a href="#neden-biz">Neden Spraybox</a></li>
+        <li><a href="#iletisim">İletişim</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Hesabım">&#128100;</button>
+      <button class="icon-btn" aria-label="Sepetim">
+        &#128722;
+        <span class="cart-badge">0</span>
+      </button>
+      <a href="#" class="btn btn-primary">Bayi Girişi</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <span class="eyebrow">Otomotiv Sarf Malzemeleri</span>
+    <h1>Ustanın elinden<br>eksik olmayan <span>marka.</span></h1>
+    <p>Fren balata spreyinden AdBlue'ya, sıvı contadan cam suyuna kadar atölyenin ihtiyacı olan her şey — bayi fiyatıyla veya bireysel siparişle kapında.</p>
+    <div class="hero-actions">
+      <a href="#kategoriler" class="btn btn-primary">Ürünleri İncele</a>
+      <a href="#" class="btn btn-whatsapp">WhatsApp'tan Sipariş Ver</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>15+</strong><span>Ürün kategorisi</span></div>
+      <div><strong>Adana</strong><span>Merkez depo</span></div>
+      <div><strong>B2B</strong><span>Bayi fiyat sistemi</span></div>
+    </div>
+  </div>
+</section>
+
+<div id="kampanya" class="campaign">
+  <div class="container">
+    <div class="campaign-text">
+      <span class="tag">Hoş Geldin</span>
+      Kampanyası — Ustaların Paketi'nde hediyeler seni bekliyor
+    </div>
+    <a href="#" class="btn btn-outline" style="border-color:#fff;color:#fff;">Detayları Gör</a>
+  </div>
+</div>
+
+<section class="section" id="kategoriler">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Kategoriler</span>
+        <h2>İhtiyacına göre ara</h2>
+      </div>
+      <p>Fren bakımından motor temizliğine, yapıştırıcıdan aksesuara — tüm ürün grupları tek yerde.</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card"><div class="cat-icon">&#128663;</div><h3>Fren Bakım</h3><p>Balata spreyi, temizleyici</p></div>
+      <div class="cat-card"><div class="cat-icon">&#129517;</div><h3>Temizlik</h3><p>Pas sökücü, silikon sprey</p></div>
+      <div class="cat-card"><div class="cat-icon">&#128295;</div><h3>Yapıştırıcı / Conta</h3><p>Sıvı conta, hızlı yapıştırıcı</p></div>
+      <div class="cat-card"><div class="cat-icon">&#9881;&#65039;</div><h3>Motor Bakım</h3><p>Susuz motor temizleme</p></div>
+      <div class="cat-card"><div class="cat-icon">&#10052;&#65039;</div><h3>Soğutma Sistemi</h3><p>Antifriz, radyatör temizleyici</p></div>
+      <div class="cat-card"><div class="cat-icon">&#129508;</div><h3>Sürüş Emniyeti</h3><p>AdBlue, cam suyu</p></div>
+      <div class="cat-card"><div class="cat-icon">&#128737;&#65039;</div><h3>Koruyucu Ekipman</h3><p>Eldiven, pamuklu bez</p></div>
+      <div class="cat-card"><div class="cat-icon">&#128295;</div><h3>Bağlantı Elemanları</h3><p>Susta klips, sabitleyiciler</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--white); padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Öne Çıkanlar</span>
+        <h2>Atölyenin favorileri</h2>
+      </div>
+      <a href="#" class="btn btn-outline">Tüm Ürünler</a>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-thumb">ürün görseli</div>
+        <div class="product-body">
+          <span class="cat-label">Fren Bakım</span>
+          <h3>Sibax Balata Sprey</h3>
+          <div class="product-foot">
+            <div class="price">— <span>Yakında</span></div>
+            <button class="add-btn">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-thumb">ürün görseli</div>
+        <div class="product-body">
+          <span class="cat-label">Temizlik</span>
+          <h3>404 Pas Sökücü</h3>
+          <div class="product-foot">
+            <div class="price">— <span>Yakında</span></div>
+            <button class="add-btn">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-thumb">ürün görseli</div>
+        <div class="product-body">
+          <span class="cat-label">Soğutma Sistemi</span>
+          <h3>Blueforce Antifriz</h3>
+          <div class="product-foot">
+            <div class="price">— <span>Yakında</span></div>
+            <button class="add-btn">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-thumb">ürün görseli</div>
+        <div class="product-body">
+          <span class="cat-label">Koruyucu Ekipman</span>
+          <h3>Beybi Plus Eldiven</h3>
+          <div class="product-foot">
+            <div class="price">— <span>Yakında</span></div>
+            <button class="add-btn">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section why" id="neden-biz">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Neden Spraybox</span>
+        <h2>İşini bilenin tercihi</h2>
+      </div>
+      <p>Adana merkezli, atölye ve bayi ağına doğrudan hizmet veren bir tedarik ortağı.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <span class="num">01</span>
+        <h3>Bayi Fiyat Sistemi</h3>
+        <p>Kayıtlı bayiler özel fiyat kademelerinden alışveriş yapar.</p>
+      </div>
+      <div class="why-item">
+        <span class="num">02</span>
+        <h3>Hızlı Sipariş</h3>
+        <p>WhatsApp veya site üzerinden dakikalar içinde sipariş oluştur.</p>
+      </div>
+      <div class="why-item">
+        <span class="num">03</span>
+        <h3>Geniş Ürün Yelpazesi</h3>
+        <p>Fren bakımından soğutma sistemine kadar tüm sarf malzemeleri.</p>
+      </div>
+      <div class="why-item">
+        <span class="num">04</span>
+        <h3>Yerel Teslimat</h3>
+        <p>Adana ve çevresine hızlı ve güvenilir teslimat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-cta" id="iletisim">
+  <div class="container">
+    <div>
+      <h2>Sipariş vermeye hazır mısın?</h2>
+      <p>Hattımız açık — hemen ara veya WhatsApp'tan yaz.</p>
+    </div>
+    <div class="contact-numbers">
+      <a href="tel:05321700984">&#128222; 0532 170 09 84</a>
+      <a href="tel:05323431164">&#128222; 0532 343 11 64</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <img src="assets/spraybox_logo_full.png" alt="Spraybox">
+      </div>
+      <div class="footer-cols">
+        <div>
+          <h4>Kurumsal</h4>
+          <ul>
+            <li><a href="#">Hakkımızda</a></li>
+            <li><a href="#">Bayilik</a></li>
+            <li><a href="#">İletişim</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Ürünler</h4>
+          <ul>
+            <li><a href="#">Fren Bakım</a></li>
+            <li><a href="#">Temizlik</a></li>
+            <li><a href="#">Soğutma Sistemi</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Destek</h4>
+          <ul>
+            <li><a href="#">Sipariş Takibi</a></li>
+            <li><a href="#">Sıkça Sorulanlar</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>© 2026 Spraybox Otomotiv Sarf Malzemeleri. Tüm hakları saklıdır.</div>
+  </div>
+</footer>
+
+<a href="#" class="whatsapp-float" aria-label="WhatsApp">&#128172;</a>
+
+</body>
+</html>
