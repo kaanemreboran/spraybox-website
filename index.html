@@ -113,7 +113,9 @@
   }
 
   .logo-wrap { justify-self: start; }
-  .logo-wrap img { height: 44px; width: auto; }
+  .logo-link { display: flex; align-items: center; gap: 12px; }
+  .logo-link img { height: 60px; width: auto; }
+  .logo-text { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 22px; color: var(--navy); letter-spacing: 0.01em; }
 
   .search-bar {
     justify-self: center;
@@ -447,7 +449,10 @@
 <header>
   <div class="header-inner">
     <div class="logo-wrap">
-      <img src="logo.png" alt="Spraybox Otomotiv Sarf Malzemeleri">
+      <a href="#" class="logo-link">
+        <img src="logo.png" alt="Spraybox Otomotiv Sarf Malzemeleri">
+        <span class="logo-text">SPRAYBOX</span>
+      </a>
     </div>
     <div class="search-bar">
       <input type="text" placeholder="Ürün, kategori veya marka ara">
