@@ -788,10 +788,14 @@
     grid.innerHTML = data.map(urun => `
       <div class="product-card">
         ${urun.kampanyali ? '<span class="campaign-tag">Kampanya</span>' : ''}
-        <div class="product-thumb">${urun.resim_url ? `<img src="${urun.resim_url}" alt="${urun.ad}" style="width:100%;height:100%;object-fit:cover;">` : 'ürün görseli'}</div>
+        <a href="urun.html?id=${urun.id}" style="display:block;">
+          <div class="product-thumb">${urun.resim_url ? `<img src="${urun.resim_url}" alt="${urun.ad}" style="width:100%;height:100%;object-fit:cover;">` : 'ürün görseli'}</div>
+        </a>
         <div class="product-body">
-          <span class="cat-label">${urun.kategoriler ? urun.kategoriler.ad : ''}</span>
-          <h3>${urun.ad}</h3>
+          <a href="urun.html?id=${urun.id}" style="display:block; color:inherit;">
+            <span class="cat-label">${urun.kategoriler ? urun.kategoriler.ad : ''}</span>
+            <h3>${urun.ad}</h3>
+          </a>
           <div class="product-foot">
             <div class="price">${tlFormat(urun.fiyat)}</div>
             <button class="add-btn" aria-label="Sepete ekle"
