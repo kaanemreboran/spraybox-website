@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kaanemreboran.github.io/spraybox-website/sitemap.xml
