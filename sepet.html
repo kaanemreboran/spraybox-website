@@ -178,7 +178,7 @@
       <a href="iletisim.html">İletişim</a>
     </nav>
     <div class="header-actions">
-      <a href="#" class="icon-btn" aria-label="Sipariş Takibi"><i class="fa-solid fa-truck-fast"></i></a>
+      <a href="hesabim.html" class="icon-btn" aria-label="Sipariş Takibi"><i class="fa-solid fa-truck-fast"></i></a>
       <a href="sepet.html" class="icon-btn" aria-label="Sepetim"><i class="fa-solid fa-cart-shopping"></i><span class="cart-badge">0</span></a>
       <a href="#" class="btn btn-outline" style="width:auto;">Kayıt Ol</a>
       <a href="#" class="btn btn-primary" style="width:auto;">Giriş Yap</a>
@@ -296,6 +296,7 @@
 
     urunSatirlariniCiz(sepet);
     odemeSecenekleriBagla();
+    formuOnDoldur();
     document.getElementById('siparis-baslat-btn').addEventListener('click', () => {
       document.querySelector('.field').scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
@@ -341,6 +342,15 @@
     });
   }
 
+  function formuOnDoldur() {
+    const musteri = musteriGetir();
+    if (!musteri) return;
+    const adAlan = document.getElementById('f-ad');
+    const telefonAlan = document.getElementById('f-telefon');
+    if (adAlan) adAlan.value = musteri.ad_soyad;
+    if (telefonAlan) telefonAlan.value = musteri.telefon;
+  }
+
   function odemeSecenekleriBagla() {
     const opts = document.querySelectorAll('.payment-option');
     opts.forEach(opt => {
@@ -374,6 +384,7 @@
     btn.textContent = 'Gönderiliyor...';
 
     const toplam = sepetToplamTutar();
+    const girisliMusteri = musteriGetir();
 
     const { data: siparis, error: siparisHata } = await db.from('siparisler').insert({
       musteri_adi: ad,
@@ -383,7 +394,8 @@
       ilce: ilce,
       toplam_tutar: toplam,
       odeme_yontemi: odeme,
-      musteri_notu: not
+      musteri_notu: not,
+      musteri_id: girisliMusteri ? girisliMusteri.id : null
     }).select().single();
 
     if (siparisHata) {
