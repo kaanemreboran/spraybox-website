@@ -321,10 +321,14 @@
     grid.innerHTML = liste.map(u => `
       <div class="product-card">
         ${u.kampanyali ? '<span class="campaign-tag">Kampanya</span>' : ''}
-        <div class="product-thumb">${u.resim_url ? `<img src="${u.resim_url}" alt="${u.ad}">` : 'ürün görseli'}</div>
+        <a href="urun.html?id=${u.id}" style="display:block;">
+          <div class="product-thumb">${u.resim_url ? `<img src="${u.resim_url}" alt="${u.ad}">` : 'ürün görseli'}</div>
+        </a>
         <div class="product-body">
-          <span class="cat-label">${u.kategoriler ? u.kategoriler.ad : ''}</span>
-          <h3>${u.ad}</h3>
+          <a href="urun.html?id=${u.id}" style="display:block; color:inherit;">
+            <span class="cat-label">${u.kategoriler ? u.kategoriler.ad : ''}</span>
+            <h3>${u.ad}</h3>
+          </a>
           <div class="product-foot">
             <div class="price">${tlFormat(u.fiyat)}</div>
             <button class="add-btn" aria-label="Sepete ekle"
