@@ -114,7 +114,7 @@
 
   .logo-wrap { justify-self: start; }
   .logo-link { display: flex; align-items: center; gap: 12px; }
-  .logo-link img { height: 90px; width: auto; }
+  .logo-link img { height: 80px; width: auto; }
   .logo-text {
     font-family: 'Anton', sans-serif;
     font-weight: 400;
@@ -435,6 +435,38 @@
     .header-inner { grid-template-columns: auto auto; }
     .hero h1 { font-size: 30px; }
     .topbar-left { display: none; }
+    .trust-item { border-right: none; border-bottom: 1px solid var(--steel-dark); padding: 14px 24px; }
+    .trust-item:last-child { border-bottom: none; }
+  }
+
+  @media (max-width: 600px) {
+    .header-inner { padding: 12px 16px; gap: 12px; }
+    .logo-link img { height: 52px; }
+    .logo-text { font-size: 20px; }
+    .icon-btn { width: 36px; height: 36px; font-size: 16px; }
+    .header-actions { gap: 4px; }
+    .header-actions .btn-primary { padding: 8px 14px; font-size: 13px; }
+    .header-actions .icon-btn[aria-label="Favorilerim"] { display: none; }
+    .topbar .container { font-size: 12px; }
+    .topbar-right a { white-space: nowrap; }
+    .hero { padding: 48px 0 60px; }
+    .hero h1 { font-size: 26px; }
+    .hero p { font-size: 14px; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions .btn { justify-content: center; }
+    .section { padding: 44px 0; }
+    .section-head h2 { font-size: 22px; }
+    .cat-grid, .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .newsletter .container { flex-direction: column; align-items: stretch; text-align: center; }
+    .newsletter-text { flex-direction: column; text-align: center; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form input { width: 100%; }
+    .contact-cta .container { flex-direction: column; align-items: stretch; text-align: center; }
+    .contact-number-row { justify-content: center; }
+    .footer-top { flex-direction: column; }
+    .footer-cols { gap: 32px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .whatsapp-float { width: 50px; height: 50px; font-size: 21px; bottom: 16px; right: 16px; }
   }
 </style>
 </head>
