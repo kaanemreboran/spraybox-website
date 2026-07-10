@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kayıt Ol | Spraybox Otomotiv Sarf Malzemeleri</title>
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=Anton&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --navy: #14294B; --blue: #2261A8; --blue-light: #5E9AE0; --red: #D31E25;
+    --steel: #EEF1F4; --steel-dark: #DBE0E5; --asphalt: #1B2027; --white: #FFFFFF; --text-muted: #667080;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: linear-gradient(150deg, var(--asphalt) 0%, var(--navy) 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  a { text-decoration: none; }
+  .auth-card { background: var(--white); border-radius: 16px; padding: 40px 36px; width: 100%; max-width: 400px; }
+  .auth-card img { height: 56px; margin: 0 auto 18px; display: block; }
+  .auth-card h1 { font-family: 'Poppins', sans-serif; font-size: 21px; text-align: center; color: var(--navy); margin-bottom: 6px; }
+  .auth-card p.sub { text-align: center; color: var(--text-muted); font-size: 13px; margin-bottom: 26px; }
+  .field { margin-bottom: 15px; }
+  .field label { display: block; font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 6px; }
+  .field input { width: 100%; border: 1px solid var(--steel-dark); border-radius: 8px; padding: 11px 14px; font-size: 14px; outline: none; font-family: 'Inter', sans-serif; }
+  .field input:focus { border-color: var(--blue); }
+  .btn-primary { width: 100%; background: var(--blue); color: var(--white); border: none; border-radius: 8px; padding: 12px; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; margin-top: 6px; }
+  .btn-primary:hover { background: var(--navy); }
+  .error-msg { color: var(--red); font-size: 13px; margin-top: 12px; text-align: center; display: none; }
+  .switch-link { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 20px; }
+  .switch-link a { color: var(--blue); font-weight: 500; }
+  .back-home { display: block; text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<div class="auth-card">
+  <img src="logo.png" alt="Spraybox">
+  <h1>Hesap Oluştur</h1>
+  <p class="sub">Sipariş geçmişini görmek için üye ol</p>
+
+  <div class="field">
+    <label>Ad Soyad</label>
+    <input type="text" id="f-ad">
+  </div>
+  <div class="field">
+    <label>Telefon</label>
+    <input type="tel" id="f-telefon" placeholder="05XX XXX XX XX">
+  </div>
+  <div class="field">
+    <label>E-posta (opsiyonel)</label>
+    <input type="email" id="f-eposta">
+  </div>
+  <div class="field">
+    <label>Şifre</label>
+    <input type="password" id="f-sifre">
+  </div>
+  <div class="field">
+    <label>Şifre (Tekrar)</label>
+    <input type="password" id="f-sifre2">
+  </div>
+
+  <button class="btn-primary" id="kayit-btn">Hesap Oluştur</button>
+  <p class="error-msg" id="hata-msg"></p>
+
+  <p class="switch-link">Zaten hesabın var mı? <a href="giris.html">Giriş Yap</a></p>
+  <a href="index.html" class="back-home"><i class="fa-solid fa-arrow-left"></i> Anasayfaya dön</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/cart.js"></script>
+<script>
+  const SUPABASE_URL = 'https://gbwvmemujyuevaiduyzp.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdid3ZtZW11anl1ZXZhaWR1eXpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NTI3NzMsImV4cCI6MjA5OTIyODc3M30.9k_NFrw00zerGJ61Vzyeqdv4arXsaSAR1YfYsWwUeqs';
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  if (musteriGetir()) window.location.href = 'hesabim.html';
+
+  function hataGoster(msg) {
+    const el = document.getElementById('hata-msg');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  document.getElementById('kayit-btn').addEventListener('click', async () => {
+    const ad = document.getElementById('f-ad').value.trim();
+    const telefon = document.getElementById('f-telefon').value.trim();
+    const eposta = document.getElementById('f-eposta').value.trim();
+    const sifre = document.getElementById('f-sifre').value;
+    const sifre2 = document.getElementById('f-sifre2').value;
+
+    document.getElementById('hata-msg').style.display = 'none';
+
+    if (!ad || !telefon || !sifre) { hataGoster('Ad soyad, telefon ve şifre zorunlu.'); return; }
+    if (sifre.length < 6) { hataGoster('Şifre en az 6 karakter olmalı.'); return; }
+    if (sifre !== sifre2) { hataGoster('Şifreler eşleşmiyor.'); return; }
+
+    const btn = document.getElementById('kayit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Kaydediliyor...';
+
+    const { data: mevcut } = await db.from('musteriler').select('id').eq('telefon', telefon).maybeSingle();
+    if (mevcut) {
+      hataGoster('Bu telefon numarasıyla zaten bir hesap var.');
+      btn.disabled = false;
+      btn.textContent = 'Hesap Oluştur';
+      return;
+    }
+
+    const sifreHash = await sha256Hesapla(sifre);
+    const { data: yeniMusteri, error } = await db.from('musteriler').insert({
+      ad_soyad: ad, telefon: telefon, eposta: eposta || null, sifre_hash: sifreHash
+    }).select().single();
+
+    if (error) {
+      hataGoster('Kayıt oluşturulamadı: ' + error.message);
+      btn.disabled = false;
+      btn.textContent = 'Hesap Oluştur';
+      return;
+    }
+
+    musteriGirisYap(yeniMusteri);
+    window.location.href = 'hesabim.html';
+  });
+</script>
+</body>
+</html>
