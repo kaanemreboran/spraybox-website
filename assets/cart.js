@@ -13,11 +13,27 @@ function sepetiKaydet(sepet) {
   sepetRozetiGuncelle();
 }
 
-function sepeteEkle(urun) {
+function sepeteEkle(urun, miktar) {
+  miktar = miktar || 1;
   const sepet = sepetiGetir();
+  const stokLimiti = (urun.stok === undefined || urun.stok === null || isNaN(urun.stok)) ? Infinity : urun.stok;
+
+  if (stokLimiti <= 0) {
+    sepetBildirimGoster(urun.ad + ' stokta yok', true);
+    return;
+  }
+
   const mevcut = sepet.find(x => x.id === urun.id);
+  const mevcutAdet = mevcut ? mevcut.adet : 0;
+  const eklenebilir = Math.min(miktar, stokLimiti - mevcutAdet);
+
+  if (eklenebilir <= 0) {
+    sepetBildirimGoster('Stok limitine ulaştın (' + stokLimiti + ' adet)', true);
+    return;
+  }
+
   if (mevcut) {
-    mevcut.adet += 1;
+    mevcut.adet += eklenebilir;
   } else {
     sepet.push({
       id: urun.id,
@@ -25,11 +41,17 @@ function sepeteEkle(urun) {
       fiyat: urun.fiyat,
       resim_url: urun.resim_url || '',
       kategori: urun.kategori || '',
-      adet: 1
+      stok: stokLimiti,
+      adet: eklenebilir
     });
   }
   sepetiKaydet(sepet);
-  sepetBildirimGoster(urun.ad);
+
+  if (eklenebilir < miktar) {
+    sepetBildirimGoster(urun.ad + ' için en fazla ' + stokLimiti + ' adet eklendi', true);
+  } else {
+    sepetBildirimGoster(urun.ad + ' sepete eklendi');
+  }
 }
 
 function sepettenCikar(id) {
@@ -41,8 +63,12 @@ function sepetAdetGuncelle(id, yeniAdet) {
   let sepet = sepetiGetir();
   const item = sepet.find(x => x.id === id);
   if (!item) return;
+  const stokLimiti = (item.stok === undefined || item.stok === null) ? Infinity : item.stok;
   if (yeniAdet <= 0) {
     sepet = sepet.filter(x => x.id !== id);
+  } else if (yeniAdet > stokLimiti) {
+    sepetBildirimGoster('Stok limitine ulaştın (' + stokLimiti + ' adet)', true);
+    return;
   } else {
     item.adet = yeniAdet;
   }
@@ -75,7 +101,7 @@ function sepetIkonuAnimasyonYap() {
   });
 }
 
-function sepetBildirimGoster(ad) {
+function sepetBildirimGoster(mesaj, hataMi) {
   if (!document.getElementById('sepet-bildirim-style')) {
     const style = document.createElement('style');
     style.id = 'sepet-bildirim-style';
@@ -91,16 +117,19 @@ function sepetBildirimGoster(ad) {
   if (!el) {
     el = document.createElement('div');
     el.id = 'sepet-bildirim';
-    el.style.cssText = 'position:fixed;top:14px;left:50%;background:#14294B;color:#fff;padding:12px 22px;border-radius:8px;font-size:14px;font-family:Inter,sans-serif;z-index:400;box-shadow:0 4px 14px rgba(0,0,0,0.25);opacity:0;max-width:280px;text-align:center;display:flex;align-items:center;gap:8px;';
+    el.style.cssText = 'position:fixed;top:14px;left:50%;color:#fff;padding:12px 22px;border-radius:8px;font-size:14px;font-family:Inter,sans-serif;z-index:400;box-shadow:0 4px 14px rgba(0,0,0,0.25);opacity:0;max-width:280px;text-align:center;display:flex;align-items:center;gap:8px;';
     document.body.appendChild(el);
   }
-  el.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#5FD98A;"></i> ' + ad + ' sepete eklendi';
+  el.style.background = hataMi ? '#D31E25' : '#14294B';
+  const ikon = hataMi ? 'fa-triangle-exclamation' : 'fa-circle-check';
+  const ikonRenk = hataMi ? '#fff' : '#5FD98A';
+  el.innerHTML = `<i class="fa-solid ${ikon}" style="color:${ikonRenk};"></i> ${mesaj}`;
   el.style.animation = 'sepetBildirimGir 0.25s ease forwards';
   el.style.opacity = '1';
   clearTimeout(window._sepetBildirimTimeout);
-  window._sepetBildirimTimeout = setTimeout(() => { el.style.opacity = '0'; }, 1800);
+  window._sepetBildirimTimeout = setTimeout(() => { el.style.opacity = '0'; }, 2000);
 
-  sepetIkonuAnimasyonYap();
+  if (!hataMi) sepetIkonuAnimasyonYap();
 }
 
 document.addEventListener('DOMContentLoaded', sepetRozetiGuncelle);
