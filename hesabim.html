@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hesabım | Spraybox Otomotiv Sarf Malzemeleri</title>
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500&family=Anton&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --navy: #14294B; --blue: #2261A8; --blue-light: #5E9AE0; --red: #D31E25;
+    --steel: #EEF1F4; --steel-dark: #DBE0E5; --asphalt: #1B2027; --white: #FFFFFF; --text-muted: #667080; --green: #1E9E5A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--steel); color: var(--asphalt); line-height: 1.6; }
+  h1, h2, h3 { font-family: 'Poppins', sans-serif; font-weight: 600; }
+  a { text-decoration: none; color: inherit; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+  header { background: var(--white); border-bottom: 1px solid var(--steel-dark); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1220px; margin: 0 auto; padding: 16px 24px; }
+  .logo-link { display: flex; align-items: center; gap: 12px; }
+  .logo-link img { height: 60px; }
+  .logo-text { font-family: 'Anton', sans-serif; font-size: 24px; color: var(--navy); }
+  .logout-link { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+  .logout-link:hover { color: var(--red); }
+
+  .page-head { background: linear-gradient(150deg, var(--asphalt) 0%, var(--navy) 100%); color: var(--white); padding: 36px 0; }
+  .page-head h1 { font-size: 24px; }
+  .page-head p { color: #C4CAD2; font-size: 14px; margin-top: 6px; }
+
+  .layout { display: grid; grid-template-columns: 260px 1fr; gap: 24px; padding: 32px 0 60px; align-items: start; }
+  .card { background: var(--white); border: 1px solid var(--steel-dark); border-radius: 14px; padding: 22px; }
+
+  .profile-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--blue); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 14px; }
+  .profile-card h3 { font-size: 16px; color: var(--navy); margin-bottom: 4px; }
+  .profile-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+
+  .order-card { border-bottom: 1px solid var(--steel-dark); padding: 18px 0; }
+  .order-card:last-child { border-bottom: none; }
+  .order-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+  .order-head .tarih { font-size: 13px; color: var(--text-muted); }
+  .order-head .tutar { font-family: 'Roboto Mono', monospace; font-weight: 500; color: var(--navy); }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+  .badge-yeni { background: #EAF1FA; color: var(--blue); }
+  .badge-onay { background: #E3F5EA; color: var(--green); }
+  .badge-iptal { background: #FBE4E4; color: var(--red); }
+  .badge-devam { background: #FFF4E0; color: #B8860B; }
+  .order-items { font-size: 13px; color: var(--text-muted); }
+
+  .empty-state { text-align: center; padding: 50px 20px; color: var(--text-muted); }
+  .empty-state i { font-size: 30px; margin-bottom: 12px; display: block; }
+
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-link">
+      <img src="logo.png" alt="Spraybox">
+      <span class="logo-text">SPRAYBOX</span>
+    </a>
+    <a href="#" class="logout-link" id="cikis-link"><i class="fa-solid fa-right-from-bracket"></i> Çıkış Yap</a>
+  </div>
+</header>
+
+<div class="page-head">
+  <div class="container">
+    <h1 id="karsilama">Hesabım</h1>
+    <p>Bilgilerini görüntüle ve siparişlerini takip et.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="layout">
+    <div class="card profile-card">
+      <div class="profile-avatar" id="avatar">--</div>
+      <h3 id="profil-ad">-</h3>
+      <p id="profil-telefon"><i class="fa-solid fa-phone"></i> -</p>
+      <p id="profil-eposta"></p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:16px;">Siparişlerim</h3>
+      <div id="siparis-listesi">
+        <div class="empty-state">Yükleniyor...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/cart.js"></script>
+<script>
+  const SUPABASE_URL = 'https://gbwvmemujyuevaiduyzp.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdid3ZtZW11anl1ZXZhaWR1eXpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NTI3NzMsImV4cCI6MjA5OTIyODc3M30.9k_NFrw00zerGJ61Vzyeqdv4arXsaSAR1YfYsWwUeqs';
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const musteri = musteriGetir();
+  if (!musteri) window.location.href = 'giris.html';
+
+  function tl(sayi) { return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2 }).format(sayi) + ' TL'; }
+
+  function durumBadge(durum) {
+    if (durum === 'İptal') return `<span class="badge badge-iptal">${durum}</span>`;
+    if (durum === 'Teslim Edildi') return `<span class="badge badge-onay">${durum}</span>`;
+    if (durum === 'Yeni') return `<span class="badge badge-yeni">${durum}</span>`;
+    return `<span class="badge badge-devam">${durum}</span>`;
+  }
+
+  async function baslat() {
+    document.getElementById('karsilama').textContent = 'Merhaba, ' + musteri.ad_soyad.split(' ')[0];
+    document.getElementById('avatar').textContent = musteri.ad_soyad.split(' ').map(k => k[0]).slice(0,2).join('').toUpperCase();
+    document.getElementById('profil-ad').textContent = musteri.ad_soyad;
+    document.getElementById('profil-telefon').innerHTML = '<i class="fa-solid fa-phone"></i> ' + musteri.telefon;
+    if (musteri.eposta) document.getElementById('profil-eposta').innerHTML = '<i class="fa-solid fa-envelope"></i> ' + musteri.eposta;
+
+    const { data: siparisler, error } = await db
+      .from('siparisler')
+      .select('*, siparis_kalemleri(urun_adi, adet)')
+      .or(`musteri_id.eq.${musteri.id},telefon.eq.${musteri.telefon}`)
+      .order('created_at', { ascending: false });
+
+    const liste = document.getElementById('siparis-listesi');
+
+    if (error || !siparisler || siparisler.length === 0) {
+      liste.innerHTML = `
+        <div class="empty-state">
+          <i class="fa-solid fa-receipt"></i>
+          Henüz bir siparişin yok.
+        </div>`;
+      return;
+    }
+
+    liste.innerHTML = siparisler.map(s => `
+      <div class="order-card">
+        <div class="order-head">
+          <div>
+            <div class="tarih">${new Date(s.created_at).toLocaleDateString('tr-TR', { day: '2-digit', month: 'long', year: 'numeric' })}</div>
+          </div>
+          ${durumBadge(s.durum)}
+          <div class="tutar">${tl(s.toplam_tutar)}</div>
+        </div>
+        <div class="order-items">${(s.siparis_kalemleri || []).map(k => `${k.urun_adi} x${k.adet}`).join(', ')}</div>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('cikis-link').addEventListener('click', (e) => {
+    e.preventDefault();
+    musteriCikisYap();
+  });
+
+  baslat();
+</script>
+</body>
+</html>
