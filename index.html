@@ -98,6 +98,8 @@
   .topbar a:hover { color: var(--blue-light); }
   .topbar-left { display: flex; align-items: center; gap: 22px; }
   .topbar-left i { color: var(--blue-light); margin-right: 6px; }
+  .topbar-center { display: flex; align-items: center; justify-content: center; gap: 32px; }
+  .topbar-center i { color: var(--blue-light); margin-right: 6px; }
 
   /* ---------- HEADER (3 kolon: logo / arama / işlemler) ---------- */
   header { background: var(--white); border-bottom: 1px solid var(--steel-dark); position: sticky; top: 0; z-index: 200; }
@@ -434,7 +436,7 @@
     .search-bar { display: none; }
     .header-inner { grid-template-columns: auto auto; }
     .hero h1 { font-size: 30px; }
-    .topbar-left { display: none; }
+    .topbar-center { gap: 18px; font-size: 13px; }
     .trust-item { border-right: none; border-bottom: 1px solid var(--steel-dark); padding: 14px 24px; }
     .trust-item:last-child { border-bottom: none; }
   }
@@ -446,9 +448,10 @@
     .icon-btn { width: 36px; height: 36px; font-size: 16px; }
     .header-actions { gap: 4px; }
     .header-actions .btn-primary { padding: 8px 14px; font-size: 13px; }
+    .header-actions .btn-outline { display: none; }
     .header-actions .icon-btn[aria-label="Favorilerim"] { display: none; }
-    .topbar .container { font-size: 12px; }
-    .topbar-right a { white-space: nowrap; }
+    .header-actions .icon-btn[aria-label="Sipariş Takibi"] { display: none; }
+    .topbar-center { gap: 12px; font-size: 11px; }
     .hero { padding: 48px 0 60px; }
     .hero h1 { font-size: 26px; }
     .hero p { font-size: 14px; }
@@ -473,14 +476,9 @@
 <body>
 
 <div class="topbar">
-  <div class="container">
-    <div class="topbar-left">
-      <a href="tel:05321700984"><i class="fa-solid fa-phone"></i>0532 170 09 84</a>
-      <a href="#"><i class="fa-solid fa-truck-fast"></i>Sipariş Takibi</a>
-    </div>
-    <div class="topbar-right">
-      <a href="#">Giriş Yap / Kayıt Ol</a>
-    </div>
+  <div class="container topbar-center">
+    <a href="tel:05321700984"><i class="fa-solid fa-phone"></i>0532 170 09 84</a>
+    <a href="tel:05323431164"><i class="fa-solid fa-phone"></i>0532 343 11 64</a>
   </div>
 </div>
 
@@ -497,11 +495,13 @@
       <button aria-label="Ara"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
     <div class="header-actions">
+      <a href="#" class="icon-btn" aria-label="Sipariş Takibi"><i class="fa-solid fa-truck-fast"></i></a>
       <button class="icon-btn" aria-label="Favorilerim"><i class="fa-regular fa-heart"></i></button>
       <a href="sepet.html" class="icon-btn" aria-label="Sepetim">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-badge">0</span>
       </a>
+      <a href="#" class="btn btn-outline">Kayıt Ol</a>
       <a href="#" class="btn btn-primary">Giriş Yap</a>
     </div>
   </div>
