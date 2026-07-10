@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sepetim | Spraybox Otomotiv Sarf Malzemeleri</title>
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#14294B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500&family=Anton&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --navy: #14294B; --blue: #2261A8; --blue-light: #5E9AE0; --red: #D31E25;
+    --steel: #EEF1F4; --steel-dark: #DBE0E5; --asphalt: #1B2027; --white: #FFFFFF;
+    --text-muted: #667080; --green: #1E9E5A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--steel); color: var(--asphalt); line-height: 1.65; }
+  h1, h2, h3 { font-family: 'Poppins', sans-serif; font-weight: 600; }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  img { max-width: 100%; display: block; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  input, select, textarea { font-family: 'Inter', sans-serif; }
+  .container { max-width: 1220px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- TOPBAR / HEADER (diğer sayfalarla aynı) ---------- */
+  .topbar { background: var(--asphalt); color: #9AA2AE; font-size: 13px; }
+  .topbar .container { display: flex; justify-content: space-between; align-items: center; padding-top: 9px; padding-bottom: 9px; }
+  .topbar a { color: #C4CAD2; }
+  .topbar a:hover { color: var(--blue-light); }
+  .topbar-left { display: flex; align-items: center; gap: 22px; }
+  .topbar-left i { color: var(--blue-light); margin-right: 6px; }
+
+  header { background: var(--white); border-bottom: 1px solid var(--steel-dark); position: sticky; top: 0; z-index: 200; }
+  .header-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; max-width: 1220px; margin: 0 auto; padding: 16px 24px; }
+  .logo-wrap { justify-self: start; }
+  .logo-link { display: flex; align-items: center; gap: 12px; }
+  .logo-link img { height: 80px; width: auto; }
+  .logo-text { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 28px; color: var(--navy); letter-spacing: 0.01em; }
+  .header-title { justify-self: center; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 18px; color: var(--navy); }
+  .header-actions { justify-self: end; display: flex; align-items: center; gap: 8px; }
+  .icon-btn { position: relative; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 10px; color: var(--navy); font-size: 18px; }
+  .icon-btn:hover { background: var(--steel); }
+  .cart-badge { position: absolute; top: 3px; right: 3px; background: var(--red); color: var(--white); font-size: 10px; font-weight: 600; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 22px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; border: 1.5px solid transparent; transition: all 0.15s; }
+  .btn-primary { background: var(--blue); color: var(--white); width: 100%; }
+  .btn-primary:hover { background: var(--navy); }
+  .btn-primary:disabled { background: var(--steel-dark); color: var(--text-muted); cursor: not-allowed; }
+  .btn-outline { border-color: var(--navy); color: var(--navy); background: transparent; }
+  .btn-outline:hover { background: var(--navy); color: var(--white); }
+  .btn-whatsapp { background: #25D366; color: var(--white); width: 100%; }
+  .btn-whatsapp:hover { background: #1EB955; }
+
+  /* ---------- BAŞLIK ŞERİDİ ---------- */
+  .page-head { background: linear-gradient(150deg, var(--asphalt) 0%, var(--navy) 100%); color: var(--white); padding: 30px 0; }
+  .breadcrumb { font-size: 13px; color: #AEB9C8; margin-bottom: 6px; }
+  .breadcrumb a:hover { color: var(--blue-light); }
+  .page-head h1 { font-size: 24px; }
+
+  /* ---------- LAYOUT ---------- */
+  .cart-layout { display: grid; grid-template-columns: 1fr 360px; gap: 28px; padding: 32px 0 64px; align-items: start; }
+  .card { background: var(--white); border: 1px solid var(--steel-dark); border-radius: 12px; padding: 20px; }
+
+  /* ---------- SEPET SATIRI ---------- */
+  .cart-item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--steel-dark); align-items: center; }
+  .cart-item:last-child { border-bottom: none; }
+  .cart-thumb { width: 72px; height: 72px; border-radius: 10px; background: linear-gradient(135deg, var(--steel) 0%, var(--steel-dark) 100%); flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 10px; }
+  .cart-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .cart-info { flex: 1; min-width: 0; }
+  .cart-info .cat-label { font-size: 11px; color: var(--blue); font-family: 'Roboto Mono', monospace; text-transform: uppercase; }
+  .cart-info h3 { font-size: 14px; font-weight: 600; color: var(--navy); margin: 4px 0; }
+  .cart-info .unit-price { font-size: 13px; color: var(--text-muted); font-family: 'Roboto Mono', monospace; }
+
+  .qty-control { display: flex; align-items: center; gap: 8px; border: 1px solid var(--steel-dark); border-radius: 8px; padding: 4px; }
+  .qty-control button { width: 26px; height: 26px; border-radius: 6px; color: var(--navy); font-size: 14px; }
+  .qty-control button:hover { background: var(--steel); }
+  .qty-control span { min-width: 20px; text-align: center; font-size: 14px; font-weight: 500; }
+
+  .line-total { font-family: 'Roboto Mono', monospace; font-weight: 500; color: var(--navy); min-width: 90px; text-align: right; }
+  .remove-btn { color: var(--text-muted); font-size: 16px; padding: 6px; border-radius: 6px; }
+  .remove-btn:hover { color: var(--red); background: var(--steel); }
+
+  /* ---------- ÖZET KARTI ---------- */
+  .summary-card { position: sticky; top: 90px; }
+  .summary-card h3 { font-size: 16px; color: var(--navy); margin-bottom: 16px; }
+  .summary-row { display: flex; justify-content: space-between; font-size: 14px; padding: 8px 0; color: var(--text-muted); }
+  .summary-row.total { border-top: 1px solid var(--steel-dark); margin-top: 8px; padding-top: 14px; font-size: 17px; font-weight: 600; color: var(--navy); }
+  .summary-row.total span:last-child { font-family: 'Roboto Mono', monospace; }
+
+  /* ---------- BOŞ SEPET ---------- */
+  .empty-cart { text-align: center; padding: 70px 20px; }
+  .empty-cart i { font-size: 40px; color: var(--steel-dark); margin-bottom: 18px; display: block; }
+  .empty-cart h2 { font-size: 20px; color: var(--navy); margin-bottom: 8px; }
+  .empty-cart p { color: var(--text-muted); margin-bottom: 24px; }
+
+  /* ---------- CHECKOUT FORM ---------- */
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 6px; }
+  .field input, .field select, .field textarea {
+    width: 100%; border: 1px solid var(--steel-dark); border-radius: 8px; padding: 11px 14px; font-size: 14px; outline: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--blue); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .payment-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .payment-option { border: 1.5px solid var(--steel-dark); border-radius: 8px; padding: 12px; text-align: center; font-size: 13px; font-weight: 500; color: var(--navy); }
+  .payment-option input { display: none; }
+  .payment-option.selected { border-color: var(--blue); background: #EAF1FA; }
+
+  /* ---------- BAŞARI EKRANI ---------- */
+  .success-screen { text-align: center; padding: 60px 20px; }
+  .success-screen i { font-size: 52px; color: var(--green); margin-bottom: 20px; display: block; }
+  .success-screen h2 { font-size: 22px; color: var(--navy); margin-bottom: 10px; }
+  .success-screen p { color: var(--text-muted); margin-bottom: 24px; }
+  .success-actions { display: flex; flex-direction: column; gap: 10px; max-width: 320px; margin: 0 auto; }
+
+  /* ---------- FOOTER ---------- */
+  footer { background: var(--asphalt); color: #8A929E; padding: 44px 0 24px; font-size: 13px; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+
+  .whatsapp-float { position: fixed; bottom: 22px; right: 22px; background: #25D366; color: var(--white); width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 14px rgba(0,0,0,0.25); z-index: 200; }
+
+  @media (max-width: 900px) {
+    .cart-layout { grid-template-columns: 1fr; }
+    .summary-card { position: static; }
+    .header-inner { grid-template-columns: auto auto; }
+    .header-title { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .header-inner { padding: 12px 16px; gap: 12px; }
+    .logo-link img { height: 52px; }
+    .logo-text { font-size: 20px; }
+    .cart-item { flex-wrap: wrap; }
+    .line-total { text-align: left; }
+    .field-row, .payment-options { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="tel:05321700984"><i class="fa-solid fa-phone"></i>0532 170 09 84</a>
+      <a href="#"><i class="fa-solid fa-truck-fast"></i>Sipariş Takibi</a>
+    </div>
+    <div class="topbar-right"><a href="#">Giriş Yap / Kayıt Ol</a></div>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <a href="index.html" class="logo-link">
+        <img src="logo.png" alt="Spraybox Otomotiv Sarf Malzemeleri">
+        <span class="logo-text">SPRAYBOX</span>
+      </a>
+    </div>
+    <div class="header-title">Sepetim</div>
+    <div class="header-actions">
+      <a href="sepet.html" class="icon-btn" aria-label="Sepetim"><i class="fa-solid fa-cart-shopping"></i><span class="cart-badge">0</span></a>
+      <a href="#" class="btn btn-primary" style="width:auto;">Giriş Yap</a>
+    </div>
+  </div>
+</header>
+
+<div class="page-head">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Anasayfa</a> / Sepetim</div>
+    <h1>Sepetim</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div id="cart-container"></div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <div>© 2026 Spraybox Otomotiv Sarf Malzemeleri. Tüm hakları saklıdır.</div>
+      <div><a href="index.html">Anasayfaya dön</a></div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/905321700984" class="whatsapp-float" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/cart.js"></script>
+<script>
+  const SUPABASE_URL = 'https://gbwvmemujyuevaiduyzp.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdid3ZtZW11anl1ZXZhaWR1eXpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NTI3NzMsImV4cCI6MjA5OTIyODc3M30.9k_NFrw00zerGJ61Vzyeqdv4arXsaSAR1YfYsWwUeqs';
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  function tl(sayi) {
+    return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2 }).format(sayi) + ' TL';
+  }
+
+  function sayfayiCiz() {
+    const sepet = sepetiGetir();
+    const kapsayici = document.getElementById('cart-container');
+
+    if (sepet.length === 0) {
+      kapsayici.innerHTML = `
+        <div class="empty-cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <h2>Sepetin boş</h2>
+          <p>Henüz sepetine ürün eklemedin.</p>
+          <a href="urunler.html" class="btn btn-primary" style="width:auto; display:inline-flex;">Ürünlere Göz At</a>
+        </div>`;
+      return;
+    }
+
+    const toplam = sepetToplamTutar();
+
+    kapsayici.innerHTML = `
+      <div class="cart-layout">
+        <div class="card" id="cart-items"></div>
+        <div>
+          <div class="card summary-card">
+            <h3>Sipariş Özeti</h3>
+            <div class="summary-row"><span>Ürün toplamı</span><span>${tl(toplam)}</span></div>
+            <div class="summary-row"><span>Kargo</span><span>Teslimatta bildirilir</span></div>
+            <div class="summary-row total"><span>Toplam</span><span>${tl(toplam)}</span></div>
+            <div style="margin-top:18px;">
+              <button class="btn btn-primary" id="siparis-baslat-btn">Siparişi Tamamla</button>
+            </div>
+          </div>
+          <div class="card" style="margin-top:16px;">
+            <div class="field">
+              <label>Ad Soyad</label>
+              <input type="text" id="f-ad">
+            </div>
+            <div class="field">
+              <label>Telefon</label>
+              <input type="tel" id="f-telefon" placeholder="05XX XXX XX XX">
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label>İl</label>
+                <input type="text" id="f-il" value="Adana">
+              </div>
+              <div class="field">
+                <label>İlçe</label>
+                <input type="text" id="f-ilce">
+              </div>
+            </div>
+            <div class="field">
+              <label>Açık Adres</label>
+              <textarea id="f-adres" rows="2"></textarea>
+            </div>
+            <div class="field">
+              <label>Ödeme Yöntemi</label>
+              <div class="payment-options">
+                <label class="payment-option selected" id="opt-kapida">
+                  <input type="radio" name="odeme" value="Kapıda Ödeme" checked>
+                  <i class="fa-solid fa-money-bill-wave"></i><br>Kapıda Ödeme
+                </label>
+                <label class="payment-option" id="opt-havale">
+                  <input type="radio" name="odeme" value="Havale/EFT">
+                  <i class="fa-solid fa-building-columns"></i><br>Havale / EFT
+                </label>
+              </div>
+            </div>
+            <div class="field">
+              <label>Sipariş Notu (opsiyonel)</label>
+              <textarea id="f-not" rows="2"></textarea>
+            </div>
+            <button class="btn btn-primary" id="siparis-gonder-btn">Siparişi Onayla</button>
+          </div>
+        </div>
+      </div>`;
+
+    urunSatirlariniCiz(sepet);
+    odemeSecenekleriBagla();
+    document.getElementById('siparis-baslat-btn').addEventListener('click', () => {
+      document.querySelector('.field').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    document.getElementById('siparis-gonder-btn').addEventListener('click', siparisGonder);
+  }
+
+  function urunSatirlariniCiz(sepet) {
+    const kapsayici = document.getElementById('cart-items');
+    kapsayici.innerHTML = sepet.map(item => `
+      <div class="cart-item" data-id="${item.id}">
+        <div class="cart-thumb">${item.resim_url ? `<img src="${item.resim_url}" alt="${item.ad}">` : 'görsel'}</div>
+        <div class="cart-info">
+          <span class="cat-label">${item.kategori}</span>
+          <h3>${item.ad}</h3>
+          <div class="unit-price">${tl(item.fiyat)} / adet</div>
+        </div>
+        <div class="qty-control">
+          <button class="qty-eksi" aria-label="Azalt"><i class="fa-solid fa-minus"></i></button>
+          <span>${item.adet}</span>
+          <button class="qty-arti" aria-label="Artır"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="line-total">${tl(item.fiyat * item.adet)}</div>
+        <button class="remove-btn" aria-label="Kaldır"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    `).join('');
+
+    kapsayici.querySelectorAll('.cart-item').forEach(row => {
+      const id = row.dataset.id;
+      row.querySelector('.qty-arti').addEventListener('click', () => {
+        const item = sepetiGetir().find(x => x.id === id);
+        sepetAdetGuncelle(id, item.adet + 1);
+        sayfayiCiz();
+      });
+      row.querySelector('.qty-eksi').addEventListener('click', () => {
+        const item = sepetiGetir().find(x => x.id === id);
+        sepetAdetGuncelle(id, item.adet - 1);
+        sayfayiCiz();
+      });
+      row.querySelector('.remove-btn').addEventListener('click', () => {
+        sepettenCikar(id);
+        sayfayiCiz();
+      });
+    });
+  }
+
+  function odemeSecenekleriBagla() {
+    const opts = document.querySelectorAll('.payment-option');
+    opts.forEach(opt => {
+      opt.addEventListener('click', () => {
+        opts.forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        opt.querySelector('input').checked = true;
+      });
+    });
+  }
+
+  async function siparisGonder() {
+    const ad = document.getElementById('f-ad').value.trim();
+    const telefon = document.getElementById('f-telefon').value.trim();
+    const il = document.getElementById('f-il').value.trim();
+    const ilce = document.getElementById('f-ilce').value.trim();
+    const adres = document.getElementById('f-adres').value.trim();
+    const not = document.getElementById('f-not').value.trim();
+    const odeme = document.querySelector('input[name="odeme"]:checked').value;
+
+    if (!ad || !telefon || !adres) {
+      alert('Lütfen ad soyad, telefon ve adres alanlarını doldur.');
+      return;
+    }
+
+    const sepet = sepetiGetir();
+    if (sepet.length === 0) { alert('Sepetin boş.'); return; }
+
+    const btn = document.getElementById('siparis-gonder-btn');
+    btn.disabled = true;
+    btn.textContent = 'Gönderiliyor...';
+
+    const toplam = sepetToplamTutar();
+
+    const { data: siparis, error: siparisHata } = await db.from('siparisler').insert({
+      musteri_adi: ad,
+      telefon: telefon,
+      adres: adres,
+      il: il,
+      ilce: ilce,
+      toplam_tutar: toplam,
+      odeme_yontemi: odeme,
+      musteri_notu: not
+    }).select().single();
+
+    if (siparisHata) {
+      alert('Sipariş oluşturulamadı: ' + siparisHata.message);
+      btn.disabled = false;
+      btn.textContent = 'Siparişi Onayla';
+      return;
+    }
+
+    const kalemler = sepet.map(item => ({
+      siparis_id: siparis.id,
+      urun_id: item.id,
+      urun_adi: item.ad,
+      birim_fiyat: item.fiyat,
+      adet: item.adet,
+      ara_toplam: item.fiyat * item.adet
+    }));
+
+    const { error: kalemHata } = await db.from('siparis_kalemleri').insert(kalemler);
+
+    if (kalemHata) {
+      console.error(kalemHata);
+    }
+
+    const whatsappMetni = encodeURIComponent(
+      `Merhaba, yeni bir sipariş verdim:\n\n` +
+      sepet.map(i => `- ${i.ad} x${i.adet} (${tl(i.fiyat * i.adet)})`).join('\n') +
+      `\n\nToplam: ${tl(toplam)}\nAd: ${ad}\nTelefon: ${telefon}\nAdres: ${adres} ${ilce}/${il}\nÖdeme: ${odeme}`
+    );
+
+    sepetiBosalt();
+    basariEkraniniGoster(whatsappMetni);
+  }
+
+  function basariEkraniniGoster(whatsappMetni) {
+    const kapsayici = document.getElementById('cart-container');
+    kapsayici.innerHTML = `
+      <div class="success-screen">
+        <i class="fa-solid fa-circle-check"></i>
+        <h2>Siparişin alındı!</h2>
+        <p>En kısa sürede seninle iletişime geçeceğiz. İstersen siparişini WhatsApp'tan da bildirebilirsin.</p>
+        <div class="success-actions">
+          <a href="https://wa.me/905321700984?text=${whatsappMetni}" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp'tan Bildir</a>
+          <a href="urunler.html" class="btn btn-outline">Alışverişe Devam Et</a>
+        </div>
+      </div>`;
+  }
+
+  sayfayiCiz();
+</script>
+
+</body>
+</html>
