@@ -45,6 +45,10 @@
   .logo-link img { height: 80px; width: auto; }
   .logo-text { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 28px; color: var(--navy); letter-spacing: 0.01em; }
   .header-title { justify-self: center; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 18px; color: var(--navy); }
+  nav.main-nav { justify-self: center; display: flex; gap: 28px; }
+  nav.main-nav a { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; color: var(--navy); }
+  nav.main-nav a:hover { color: var(--blue); }
+  nav.main-nav a.active { color: var(--blue); }
   .header-actions { justify-self: end; display: flex; align-items: center; gap: 8px; }
   .icon-btn { position: relative; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 10px; color: var(--navy); font-size: 18px; }
   .icon-btn:hover { background: var(--steel); }
@@ -131,7 +135,7 @@
     .cart-layout { grid-template-columns: 1fr; }
     .summary-card { position: static; }
     .header-inner { grid-template-columns: auto auto; }
-    .header-title { display: none; }
+    nav.main-nav { display: none; }
   }
 
   @media (max-width: 600px) {
@@ -164,7 +168,12 @@
         <span class="logo-text">SPRAYBOX</span>
       </a>
     </div>
-    <div class="header-title">Sepetim</div>
+    <nav class="main-nav">
+      <a href="index.html">Anasayfa</a>
+      <a href="urunler.html">Ürünler</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="iletisim.html">İletişim</a>
+    </nav>
     <div class="header-actions">
       <a href="sepet.html" class="icon-btn" aria-label="Sepetim"><i class="fa-solid fa-cart-shopping"></i><span class="cart-badge">0</span></a>
       <a href="#" class="btn btn-primary" style="width:auto;">Giriş Yap</a>
