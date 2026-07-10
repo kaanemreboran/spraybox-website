@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="page-title-tag">Ürün | Spraybox Otomotiv Sarf Malzemeleri</title>
+<meta name="description" id="meta-desc" content="Spraybox otomotiv sarf malzemeleri ürün kataloğunda bu ürünün detaylarını, fiyatını ve stok durumunu inceleyin.">
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="Spraybox">
+<meta property="og:title" id="og-title" content="Spraybox Otomotiv Sarf Malzemeleri">
+<meta property="og:description" id="og-desc" content="Spraybox otomotiv sarf malzemeleri ürün kataloğu.">
+<meta property="og:image" id="og-image" content="https://kaanemreboran.github.io/spraybox-website/assets/og-image.jpg">
 <meta name="robots" content="index, follow">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
@@ -218,6 +224,24 @@
 
     mevcutUrun = urun;
     document.getElementById('page-title-tag').textContent = urun.ad + ' | Spraybox';
+
+    const kisaAciklama = (urun.aciklama && urun.aciklama.trim())
+      ? urun.aciklama.trim().slice(0, 155)
+      : `${urun.ad} — Spraybox otomotiv sarf malzemeleri kataloğunda uygun fiyatlarla.`;
+
+    document.getElementById('meta-desc').setAttribute('content', kisaAciklama);
+    document.getElementById('og-title').setAttribute('content', urun.ad + ' | Spraybox');
+    document.getElementById('og-desc').setAttribute('content', kisaAciklama);
+    if (urun.resim_url) document.getElementById('og-image').setAttribute('content', urun.resim_url);
+
+    let canonicalTag = document.querySelector('link[rel="canonical"]');
+    if (!canonicalTag) {
+      canonicalTag = document.createElement('link');
+      canonicalTag.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalTag);
+    }
+    canonicalTag.setAttribute('href', 'https://kaanemreboran.github.io/spraybox-website/urun.html?id=' + urun.id);
+
     document.getElementById('breadcrumb').innerHTML = `
       <a href="index.html">Anasayfa</a> / <a href="urunler.html">Ürünler</a> /
       ${urun.kategoriler ? `<a href="urunler.html?kategori=${encodeURIComponent(urun.kategoriler.slug)}">${urun.kategoriler.ad}</a> / ` : ''}
