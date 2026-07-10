@@ -394,6 +394,17 @@
       console.error(kalemHata);
     }
 
+    // Stokları düş
+    for (const item of sepet) {
+      const { data: urunGuncel, error: okumaHata } = await db.from('urunler').select('stok').eq('id', item.id).single();
+      if (okumaHata) { console.error('Stok okunamadı:', item.id, okumaHata); continue; }
+      if (urunGuncel) {
+        const yeniStok = Math.max(0, urunGuncel.stok - item.adet);
+        const { error: yazmaHata } = await db.from('urunler').update({ stok: yeniStok }).eq('id', item.id);
+        if (yazmaHata) console.error('Stok güncellenemedi:', item.id, yazmaHata);
+      }
+    }
+
     const whatsappMetni = encodeURIComponent(
       `Merhaba, yeni bir sipariş verdim:\n\n` +
       sepet.map(i => `- ${i.ad} x${i.adet} (${tl(i.fiyat * i.adet)})`).join('\n') +
