@@ -552,7 +552,7 @@
       </div>
       <p>Fren bakımından motor temizliğine, yapıştırıcıdan aksesuara — tüm ürün grupları tek yerde.</p>
     </div>
-    <div class="cat-grid">
+    <div class="cat-grid" id="cat-grid">
       <div class="cat-card"><div class="cat-icon"><i class="fa-solid fa-car-burst"></i></div><h3>Fren Bakım</h3><p>Balata spreyi, temizleyici</p></div>
       <div class="cat-card"><div class="cat-icon"><i class="fa-solid fa-spray-can"></i></div><h3>Temizlik</h3><p>Pas sökücü, silikon sprey</p></div>
       <div class="cat-card"><div class="cat-icon"><i class="fa-solid fa-droplet"></i></div><h3>Yapıştırıcı / Conta</h3><p>Sıvı conta, hızlı yapıştırıcı</p></div>
@@ -574,7 +574,7 @@
       </div>
       <a href="#" class="btn btn-outline">Tüm Ürünler</a>
     </div>
-    <div class="product-grid">
+    <div class="product-grid" id="product-grid">
       <div class="product-card">
         <span class="campaign-tag">Kampanya</span>
         <div class="product-thumb">ürün görseli</div>
@@ -734,6 +734,75 @@
 </footer>
 
 <a href="https://wa.me/905321700984" class="whatsapp-float" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = 'https://gbwvmemujyuevaiduyzp.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdid3ZtZW11anl1ZXZhaWR1eXpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NTI3NzMsImV4cCI6MjA5OTIyODc3M30.9k_NFrw00zerGJ61Vzyeqdv4arXsaSAR1YfYsWwUeqs';
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  function tlFormat(sayi) {
+    return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY', minimumFractionDigits: 2 }).format(sayi);
+  }
+
+  async function kategorileriYukle() {
+    const grid = document.getElementById('cat-grid');
+    const { data, error } = await db.from('kategoriler').select('*').order('sira', { ascending: true });
+    if (error || !data || data.length === 0) {
+      console.error('Kategoriler yüklenemedi, statik veriler gösteriliyor.', error);
+      return;
+    }
+    grid.innerHTML = data.map(kat => `
+      <a href="urunler.html?kategori=${kat.slug}" class="cat-card">
+        <div class="cat-icon"><i class="${kat.ikon || 'fa-solid fa-tag'}"></i></div>
+        <h3>${kat.ad}</h3>
+        <p>${kat.aciklama || ''}</p>
+      </a>
+    `).join('');
+  }
+
+  async function urunleriYukle() {
+    const grid = document.getElementById('product-grid');
+    const { data, error } = await db
+      .from('urunler')
+      .select('*, kategoriler(ad)')
+      .eq('aktif', true)
+      .order('created_at', { ascending: false })
+      .limit(8);
+
+    if (error) {
+      console.error('Ürünler yüklenemedi.', error);
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1; text-align:center; padding:40px 20px; color:var(--text-muted);">
+          <i class="fa-solid fa-box-open" style="font-size:32px; margin-bottom:12px; display:block;"></i>
+          Ürünler yakında eklenecek. Takipte kal!
+        </div>`;
+      return;
+    }
+
+    grid.innerHTML = data.map(urun => `
+      <div class="product-card">
+        ${urun.kampanyali ? '<span class="campaign-tag">Kampanya</span>' : ''}
+        <div class="product-thumb">${urun.resim_url ? `<img src="${urun.resim_url}" alt="${urun.ad}" style="width:100%;height:100%;object-fit:cover;">` : 'ürün görseli'}</div>
+        <div class="product-body">
+          <span class="cat-label">${urun.kategoriler ? urun.kategoriler.ad : ''}</span>
+          <h3>${urun.ad}</h3>
+          <div class="product-foot">
+            <div class="price">${tlFormat(urun.fiyat)}</div>
+            <button class="add-btn" aria-label="Sepete ekle"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  kategorileriYukle();
+  urunleriYukle();
+</script>
 
 </body>
 </html>
