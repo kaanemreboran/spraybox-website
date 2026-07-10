@@ -267,12 +267,12 @@
       </div>
     `;
 
-    document.getElementById('qty-arti').addEventListener('click', () => { secilenAdet++; document.getElementById('qty-deger').textContent = secilenAdet; });
+    document.getElementById('qty-arti').addEventListener('click', () => {
+      if (secilenAdet < urun.stok) { secilenAdet++; document.getElementById('qty-deger').textContent = secilenAdet; }
+    });
     document.getElementById('qty-eksi').addEventListener('click', () => { if (secilenAdet > 1) { secilenAdet--; document.getElementById('qty-deger').textContent = secilenAdet; } });
     document.getElementById('sepete-ekle-btn').addEventListener('click', () => {
-      for (let i = 0; i < secilenAdet; i++) {
-        sepeteEkle({ id: urun.id, ad: urun.ad, fiyat: urun.fiyat, resim_url: urun.resim_url, kategori: urun.kategoriler ? urun.kategoriler.ad : '' });
-      }
+      sepeteEkle({ id: urun.id, ad: urun.ad, fiyat: urun.fiyat, resim_url: urun.resim_url, kategori: urun.kategoriler ? urun.kategoriler.ad : '', stok: urun.stok }, secilenAdet);
     });
 
     benzerUrunleriGetir(urun);
