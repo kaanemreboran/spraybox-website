@@ -170,7 +170,7 @@
     </div>
     <div class="header-actions">
       <button class="icon-btn" aria-label="Favorilerim"><i class="fa-regular fa-heart"></i></button>
-      <button class="icon-btn" aria-label="Sepetim"><i class="fa-solid fa-cart-shopping"></i><span class="cart-badge">0</span></button>
+      <a href="sepet.html" class="icon-btn" aria-label="Sepetim"><i class="fa-solid fa-cart-shopping"></i><span class="cart-badge">0</span></a>
       <a href="#" class="btn btn-primary">Giriş Yap</a>
     </div>
   </div>
@@ -240,6 +240,7 @@
 <a href="https://wa.me/905321700984" class="whatsapp-float" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/cart.js"></script>
 <script>
   const SUPABASE_URL = 'https://gbwvmemujyuevaiduyzp.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdid3ZtZW11anl1ZXZhaWR1eXpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NTI3NzMsImV4cCI6MjA5OTIyODc3M30.9k_NFrw00zerGJ61Vzyeqdv4arXsaSAR1YfYsWwUeqs';
@@ -326,11 +327,28 @@
           <h3>${u.ad}</h3>
           <div class="product-foot">
             <div class="price">${tlFormat(u.fiyat)}</div>
-            <button class="add-btn" aria-label="Sepete ekle"><i class="fa-solid fa-plus"></i></button>
+            <button class="add-btn" aria-label="Sepete ekle"
+              data-id="${u.id}" data-ad="${u.ad.replace(/"/g, '&quot;')}"
+              data-fiyat="${u.fiyat}" data-resim="${u.resim_url || ''}"
+              data-kategori="${u.kategoriler ? u.kategoriler.ad.replace(/"/g, '&quot;') : ''}">
+              <i class="fa-solid fa-plus"></i>
+            </button>
           </div>
         </div>
       </div>
     `).join('');
+
+    grid.querySelectorAll('.add-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sepeteEkle({
+          id: btn.dataset.id,
+          ad: btn.dataset.ad,
+          fiyat: parseFloat(btn.dataset.fiyat),
+          resim_url: btn.dataset.resim,
+          kategori: btn.dataset.kategori
+        });
+      });
+    });
   }
 
   document.querySelector('.search-bar button').addEventListener('click', () => {
