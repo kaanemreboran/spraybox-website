@@ -7,20 +7,19 @@
 <meta name="description" content="Spraybox Otomotiv Sarf Malzemeleri — fren balata spreyi, sıvı conta, teknik temizleyiciler ve daha fazlası. Hızlı teslimat, WhatsApp'tan kolay sipariş.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root {
-    --navy: #12294D;
-    --blue: #1E56A0;
-    --blue-light: #4C8DDA;
+    --navy: #14294B;
+    --blue: #2261A8;
+    --blue-light: #5E9AE0;
     --red: #D31E25;
-    --steel: #EDEFF2;
-    --steel-dark: #D8DCE1;
-    --asphalt: #1B1D21;
-    --gold: #C89B3C;
+    --steel: #EEF1F4;
+    --steel-dark: #DBE0E5;
+    --asphalt: #1B2027;
     --white: #FFFFFF;
-    --text-muted: #5B6472;
+    --text-muted: #667080;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,13 +28,12 @@
     font-family: 'Inter', sans-serif;
     background: var(--steel);
     color: var(--asphalt);
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   h1, h2, h3, .display {
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
   }
 
   .mono { font-family: 'Roboto Mono', monospace; }
@@ -44,74 +42,48 @@
   img { max-width: 100%; display: block; }
   button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-  .container {
-    max-width: 1220px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+  .container { max-width: 1220px; margin: 0 auto; padding: 0 24px; }
 
   /* ---------- TOPBAR ---------- */
-  .topbar {
-    background: var(--asphalt);
-    color: #9AA0A8;
-    font-size: 13px;
-  }
+  .topbar { background: var(--asphalt); color: #9AA2AE; font-size: 13px; }
 
   .topbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 9px;
+    padding-bottom: 9px;
   }
 
-  .topbar a { color: #C9CDD3; }
+  .topbar a { color: #C4CAD2; }
   .topbar a:hover { color: var(--blue-light); }
-
   .topbar-left { display: flex; align-items: center; gap: 22px; }
   .topbar-left i { color: var(--blue-light); margin-right: 6px; }
 
-  /* ---------- PROMO STRIP ---------- */
-  .promo-strip {
-    background: var(--red);
-    color: var(--white);
-    text-align: center;
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.03em;
-    padding: 9px 0;
-  }
-
-  .promo-strip strong { font-weight: 700; }
-
-  /* ---------- HEADER ---------- */
-  header {
-    background: var(--white);
-    border-bottom: 1px solid var(--steel-dark);
-    position: sticky;
-    top: 0;
-    z-index: 200;
-  }
+  /* ---------- HEADER (3 kolon: logo / arama / işlemler) ---------- */
+  header { background: var(--white); border-bottom: 1px solid var(--steel-dark); position: sticky; top: 0; z-index: 200; }
 
   .header-inner {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 28px;
+    gap: 24px;
     max-width: 1220px;
     margin: 0 auto;
     padding: 16px 24px;
   }
 
-  .logo-wrap img { height: 46px; width: auto; }
+  .logo-wrap { justify-self: start; }
+  .logo-wrap img { height: 44px; width: auto; }
 
   .search-bar {
-    flex: 1;
+    justify-self: center;
     display: flex;
     align-items: center;
     background: var(--steel);
-    border-radius: 6px;
-    padding: 0 6px 0 16px;
-    max-width: 480px;
+    border-radius: 24px;
+    padding: 0 6px 0 20px;
+    width: 420px;
   }
 
   .search-bar input {
@@ -128,18 +100,18 @@
   .search-bar input::placeholder { color: var(--text-muted); }
 
   .search-bar button {
-    width: 36px;
-    height: 36px;
-    border-radius: 5px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
     background: var(--navy);
     color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 13px;
   }
 
-  .header-actions { display: flex; align-items: center; gap: 8px; }
+  .header-actions { justify-self: end; display: flex; align-items: center; gap: 8px; }
 
   .icon-btn {
     position: relative;
@@ -148,7 +120,7 @@
     justify-content: center;
     width: 42px;
     height: 42px;
-    border-radius: 6px;
+    border-radius: 10px;
     color: var(--navy);
     font-size: 18px;
   }
@@ -157,18 +129,14 @@
 
   .cart-badge {
     position: absolute;
-    top: 3px;
-    right: 3px;
+    top: 3px; right: 3px;
     background: var(--red);
     color: var(--white);
     font-size: 10px;
-    font-weight: 700;
-    width: 16px;
-    height: 16px;
+    font-weight: 600;
+    width: 16px; height: 16px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
   }
 
   .btn {
@@ -176,13 +144,11 @@
     align-items: center;
     gap: 8px;
     padding: 11px 22px;
-    border-radius: 4px;
-    font-family: 'Oswald', sans-serif;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    border: 2px solid transparent;
+    border: 1.5px solid transparent;
     transition: all 0.15s;
   }
 
@@ -193,456 +159,234 @@
   .btn-whatsapp { background: #25D366; color: var(--white); }
   .btn-whatsapp:hover { background: #1EB955; }
 
-  /* ---------- KAYDIRILABİLİR BANNER ALANI ---------- */
-  .banner-slider {
-    background: var(--white);
-    border-bottom: 1px solid var(--steel-dark);
-    padding: 18px 0;
-  }
-
-  .banner-scroll {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 4px;
-  }
-
-  .banner-scroll::-webkit-scrollbar { height: 6px; }
-  .banner-scroll::-webkit-scrollbar-thumb { background: var(--steel-dark); border-radius: 3px; }
-
-  .banner-slide {
-    flex: 0 0 auto;
-    width: 640px;
-    height: 220px;
-    border-radius: 10px;
-    scroll-snap-align: start;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    padding: 0 40px;
-    color: var(--white);
-  }
-
-  .banner-slide.s1 { background: linear-gradient(120deg, var(--navy) 0%, var(--blue) 100%); }
-  .banner-slide.s2 { background: linear-gradient(120deg, var(--asphalt) 0%, #333740 100%); }
-  .banner-slide.s3 { background: linear-gradient(120deg, var(--red) 0%, #A81419 100%); }
-
-  .banner-slide .slide-text { max-width: 320px; }
-  .banner-slide .eyebrow { color: rgba(255,255,255,0.75); }
-  .banner-slide h2 { font-size: 26px; margin-bottom: 14px; line-height: 1.15; }
-  .banner-slide .btn-outline { border-color: rgba(255,255,255,0.6); color: var(--white); }
-  .banner-slide .btn-outline:hover { background: rgba(255,255,255,0.15); color: var(--white); }
-
-  .banner-slide .slide-icon {
-    position: absolute;
-    right: 24px;
-    font-size: 120px;
-    color: rgba(255,255,255,0.12);
-  }
-
-  @media (max-width: 700px) {
-    .banner-slide { width: 88vw; padding: 0 24px; }
-    .banner-slide .slide-icon { font-size: 90px; }
-  }
-
   /* ---------- SWEEP DIVIDER (imza öğesi) ---------- */
   .sweep { height: 46px; width: 100%; display: block; }
 
   /* ---------- HERO ---------- */
   .hero {
-    background: var(--asphalt);
+    background: linear-gradient(150deg, var(--asphalt) 0%, var(--navy) 100%);
     color: var(--white);
     position: relative;
     overflow: hidden;
-    padding: 76px 0 96px;
+    padding: 72px 0 88px;
   }
 
-  .hero::before {
+  .hero::after {
     content: "";
     position: absolute;
-    inset: 0;
-    background: linear-gradient(115deg, transparent 58%, var(--blue) 58.4%, var(--blue) 60%, var(--blue-light) 60.4%, var(--blue-light) 61%, transparent 61.4%);
-    opacity: 0.9;
+    right: -80px; top: -80px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    border: 60px solid rgba(94,154,224,0.08);
   }
 
-  .hero-inner { position: relative; z-index: 2; max-width: 620px; }
+  .hero-inner { position: relative; z-index: 2; max-width: 600px; }
+
+  .campaign-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+  }
 
   .eyebrow {
     font-family: 'Roboto Mono', monospace;
     font-size: 13px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--blue-light);
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     display: block;
   }
 
-  .hero h1 { font-size: 44px; line-height: 1.12; margin-bottom: 20px; }
+  .hero h1 { font-size: 42px; line-height: 1.18; margin-bottom: 18px; font-weight: 600; }
   .hero h1 span { color: var(--blue-light); }
-  .hero p { font-size: 16px; color: #C9CDD3; max-width: 460px; margin-bottom: 32px; text-transform: none; font-family: 'Inter', sans-serif; }
+  .hero p { font-size: 16px; color: #C4CAD2; max-width: 460px; margin-bottom: 30px; font-family: 'Inter', sans-serif; }
   .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
-  .hero-stats {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    gap: 40px;
-    margin-top: 56px;
-    padding-top: 28px;
-    border-top: 1px solid #33363c;
-    max-width: 620px;
-  }
-
-  .hero-stats div strong { font-family: 'Oswald', sans-serif; font-size: 26px; display: block; color: var(--blue-light); }
-  .hero-stats div span { font-size: 13px; color: #9AA0A8; }
-
   /* ---------- GÜVEN ROZETLERİ ---------- */
-  .trust-row {
-    background: var(--white);
-    border-bottom: 1px solid var(--steel-dark);
-  }
+  .trust-row { background: var(--white); border-bottom: 1px solid var(--steel-dark); }
 
-  .trust-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0;
-    padding: 28px 0;
-  }
+  .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); padding: 26px 0; }
 
-  .trust-item {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 0 24px;
-    border-right: 1px solid var(--steel-dark);
-  }
-
+  .trust-item { display: flex; align-items: center; gap: 14px; padding: 0 24px; border-right: 1px solid var(--steel-dark); }
   .trust-item:last-child { border-right: none; }
-
-  .trust-item i {
-    font-size: 24px;
-    color: var(--blue);
-    width: 40px;
-    text-align: center;
-  }
-
-  .trust-item h4 { font-family: 'Inter', sans-serif; text-transform: none; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
-  .trust-item p { font-size: 12px; color: var(--text-muted); text-transform: none; }
+  .trust-item i { font-size: 22px; color: var(--blue); width: 38px; text-align: center; }
+  .trust-item h4 { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+  .trust-item p { font-size: 12px; color: var(--text-muted); }
 
   /* ---------- SECTION HEADER ---------- */
   .section { padding: 64px 0; }
-  .section-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 36px;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-
+  .section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 34px; gap: 24px; flex-wrap: wrap; }
   .section-head .eyebrow { color: var(--blue); }
-  .section-head h2 { font-size: 28px; color: var(--navy); }
-  .section-head p { color: var(--text-muted); font-size: 14px; max-width: 420px; text-transform: none; font-family: 'Inter', sans-serif; }
+  .section-head h2 { font-size: 26px; color: var(--navy); }
+  .section-head p { color: var(--text-muted); font-size: 14px; max-width: 420px; font-family: 'Inter', sans-serif; }
 
-  /* ---------- KATEGORİLER GRID ---------- */
-  .cat-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-  }
+  /* ---------- KATEGORİLER ---------- */
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
 
   .cat-card {
     background: var(--white);
     border: 1px solid var(--steel-dark);
-    border-radius: 8px;
-    padding: 28px 22px;
+    border-radius: 14px;
+    padding: 26px 22px;
     transition: transform 0.15s, border-color 0.15s;
   }
 
   .cat-card:hover { transform: translateY(-3px); border-color: var(--blue); }
 
   .cat-icon {
-    width: 46px;
-    height: 46px;
-    border-radius: 8px;
+    width: 46px; height: 46px;
+    border-radius: 12px;
     background: var(--steel);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    color: var(--blue);
-    margin-bottom: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: var(--blue);
+    margin-bottom: 16px;
   }
 
-  .cat-card h3 { font-size: 15px; color: var(--navy); margin-bottom: 6px; }
-  .cat-card p { font-size: 13px; color: var(--text-muted); text-transform: none; font-family: 'Inter', sans-serif; }
+  .cat-card h3 { font-size: 15px; color: var(--navy); margin-bottom: 6px; font-weight: 600; }
+  .cat-card p { font-size: 13px; color: var(--text-muted); font-family: 'Inter', sans-serif; }
 
-  /* ---------- KAMPANYA BANNER ŞERİDİ ---------- */
-  .promo-banners {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-  }
-
-  .promo-banner {
-    border-radius: 8px;
-    padding: 30px 26px;
-    color: var(--white);
-    position: relative;
-    overflow: hidden;
-    min-height: 140px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .promo-banner.b1 { background: linear-gradient(135deg, var(--navy), var(--blue)); }
-  .promo-banner.b2 { background: linear-gradient(135deg, var(--red), #A81419); }
-  .promo-banner.b3 { background: linear-gradient(135deg, #333740, var(--asphalt)); }
-
-  .promo-banner span.tag {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    opacity: 0.85;
-    margin-bottom: 8px;
-  }
-
-  .promo-banner h3 { font-size: 20px; margin-bottom: 14px; }
-
-  .promo-banner .btn-outline { border-color: rgba(255,255,255,0.6); color: var(--white); align-self: flex-start; }
-  .promo-banner .btn-outline:hover { background: rgba(255,255,255,0.15); color: var(--white); }
-
-  /* ---------- ÜRÜN KARUSELİ ---------- */
-  .carousel-row {
-    display: flex;
-    gap: 18px;
-    overflow-x: auto;
-    padding-bottom: 12px;
-    scroll-snap-type: x mandatory;
-  }
-
-  .carousel-row::-webkit-scrollbar { height: 6px; }
-  .carousel-row::-webkit-scrollbar-thumb { background: var(--steel-dark); border-radius: 3px; }
+  /* ---------- ÖNE ÇIKAN ÜRÜNLER ---------- */
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
 
   .product-card {
     background: var(--white);
     border: 1px solid var(--steel-dark);
-    border-radius: 8px;
+    border-radius: 14px;
     overflow: hidden;
-    flex: 0 0 230px;
-    scroll-snap-align: start;
+    position: relative;
+  }
+
+  .campaign-tag {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 2;
   }
 
   .product-thumb {
-    height: 160px;
+    height: 150px;
     background: linear-gradient(135deg, var(--steel) 0%, var(--steel-dark) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    font-size: 13px;
-    font-family: 'Roboto Mono', monospace;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); font-size: 13px; font-family: 'Roboto Mono', monospace;
   }
 
   .product-body { padding: 18px; }
 
   .product-body .cat-label {
-    font-size: 11px;
-    color: var(--blue);
+    font-size: 11px; color: var(--blue);
     font-family: 'Roboto Mono', monospace;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    display: block;
+    letter-spacing: 0.03em; text-transform: uppercase;
+    margin-bottom: 6px; display: block;
   }
 
-  .product-body h3 {
-    font-family: 'Inter', sans-serif;
-    text-transform: none;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 12px;
-    min-height: 36px;
-  }
+  .product-body h3 { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 12px; min-height: 36px; }
 
   .product-foot { display: flex; align-items: center; justify-content: space-between; }
-
   .price { font-family: 'Roboto Mono', monospace; font-weight: 500; font-size: 15px; color: var(--navy); }
   .price span { font-size: 11px; color: var(--text-muted); display: block; font-weight: 400; }
 
-  .add-btn {
-    width: 34px;
-    height: 34px;
-    border-radius: 6px;
-    background: var(--navy);
-    color: var(--white);
-    font-size: 16px;
-  }
-
+  .add-btn { width: 34px; height: 34px; border-radius: 10px; background: var(--navy); color: var(--white); font-size: 16px; }
   .add-btn:hover { background: var(--blue); }
-
-  .section-head-inline {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 22px;
-  }
-
-  .section-head-inline h3 { font-size: 20px; color: var(--navy); }
-  .section-head-inline a { font-size: 13px; color: var(--blue); font-family: 'Oswald', sans-serif; letter-spacing: 0.03em; text-transform: uppercase; }
-  .section-head-inline a:hover { text-decoration: underline; }
 
   /* ---------- NEDEN SPRAYBOX ---------- */
   .why { background: var(--navy); color: var(--white); }
   .why .section-head .eyebrow { color: var(--blue-light); }
   .why .section-head h2 { color: var(--white); }
-  .why .section-head p { color: #B7C1CE; }
+  .why .section-head p { color: #AEB9C8; }
 
   .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 28px; }
-
-  .why-item { border-left: 3px solid var(--blue-light); padding-left: 18px; }
+  .why-item { border-left: 3px solid var(--blue-light); padding-left: 18px; border-radius: 2px; }
   .why-item .num { font-family: 'Roboto Mono', monospace; color: var(--blue-light); font-size: 13px; margin-bottom: 8px; display: block; }
-  .why-item h3 { font-family: 'Oswald', sans-serif; font-size: 17px; margin-bottom: 8px; }
-  .why-item p { font-size: 14px; color: #B7C1CE; text-transform: none; font-family: 'Inter', sans-serif; }
+  .why-item h3 { font-family: 'Poppins', sans-serif; font-size: 16px; margin-bottom: 8px; font-weight: 600; }
+  .why-item p { font-size: 14px; color: #AEB9C8; font-family: 'Inter', sans-serif; }
 
   /* ---------- BÜLTEN ---------- */
-  .newsletter {
-    background: var(--steel);
-    border-top: 1px solid var(--steel-dark);
-    border-bottom: 1px solid var(--steel-dark);
-    padding: 48px 0;
-  }
-
-  .newsletter .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-
-  .newsletter-text { display: flex; align-items: center; gap: 18px; }
-  .newsletter-text i { font-size: 30px; color: var(--blue); }
-  .newsletter-text h3 { font-size: 18px; color: var(--navy); margin-bottom: 4px; }
-  .newsletter-text p { font-size: 13px; color: var(--text-muted); text-transform: none; font-family: 'Inter', sans-serif; }
+  .newsletter { background: var(--steel); border-top: 1px solid var(--steel-dark); border-bottom: 1px solid var(--steel-dark); padding: 44px 0; }
+  .newsletter .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .newsletter-text { display: flex; align-items: center; gap: 16px; }
+  .newsletter-text i { font-size: 28px; color: var(--blue); }
+  .newsletter-text h3 { font-size: 17px; color: var(--navy); margin-bottom: 4px; }
+  .newsletter-text p { font-size: 13px; color: var(--text-muted); font-family: 'Inter', sans-serif; }
 
   .newsletter-form { display: flex; gap: 10px; }
-
   .newsletter-form input {
     border: 1px solid var(--steel-dark);
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 12px 16px;
     font-size: 14px;
-    width: 260px;
+    width: 250px;
     font-family: 'Inter', sans-serif;
     outline: none;
+    background: var(--white);
   }
-
   .newsletter-form input:focus { border-color: var(--blue); }
 
   /* ---------- İLETİŞİM CTA ---------- */
-  .contact-cta { background: var(--blue); color: var(--white); padding: 56px 0; }
-
+  .contact-cta { background: var(--blue); color: var(--white); padding: 52px 0; }
   .contact-cta .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
-
-  .contact-cta h2 { font-size: 26px; margin-bottom: 8px; }
-  .contact-cta p { color: #D9E6F5; text-transform: none; font-family: 'Inter', sans-serif; }
+  .contact-cta h2 { font-size: 24px; margin-bottom: 8px; }
+  .contact-cta p { color: #D9E6F5; font-family: 'Inter', sans-serif; }
 
   .contact-numbers { display: flex; flex-direction: column; gap: 12px; }
   .contact-number-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .number-label { font-family: 'Roboto Mono', monospace; font-size: 15px; color: var(--white); min-width: 140px; }
 
   .mini-btn {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    background: rgba(255,255,255,0.14);
-    padding: 8px 14px;
-    border-radius: 6px;
-    white-space: nowrap;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+    background: rgba(255,255,255,0.15);
+    padding: 8px 14px; border-radius: 8px; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 6px;
   }
-
-  .mini-btn:hover { background: rgba(255,255,255,0.24); }
+  .mini-btn:hover { background: rgba(255,255,255,0.25); }
   .mini-btn-wa { background: #25D366; color: var(--white); }
   .mini-btn-wa:hover { background: #1EB955; }
 
   /* ---------- FOOTER ---------- */
-  footer { background: var(--asphalt); color: #8A8F97; padding: 48px 0 24px; font-size: 13px; }
+  footer { background: var(--asphalt); color: #8A929E; padding: 44px 0 24px; font-size: 13px; }
 
-  .footer-top {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 32px;
-    padding-bottom: 28px;
-    margin-bottom: 24px;
-    border-bottom: 1px solid #2B2E33;
-  }
-
+  .footer-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px; padding-bottom: 26px; margin-bottom: 22px; border-bottom: 1px solid #2A3038; }
   .footer-brand { max-width: 260px; }
-  .footer-brand img { height: 34px; margin-bottom: 14px; }
-  .footer-brand p { color: #767B83; font-size: 13px; margin-bottom: 16px; }
+  .footer-brand img { height: 32px; margin-bottom: 14px; }
+  .footer-brand p { color: #77808C; font-size: 13px; margin-bottom: 16px; }
   .footer-social { display: flex; gap: 10px; }
-  .footer-social a {
-    width: 34px; height: 34px; border-radius: 50%;
-    background: #24272C; display: flex; align-items: center; justify-content: center;
-    color: #C9CDD3; font-size: 14px;
-  }
+  .footer-social a { width: 34px; height: 34px; border-radius: 50%; background: #262C34; display: flex; align-items: center; justify-content: center; color: #C4CAD2; font-size: 14px; }
   .footer-social a:hover { background: var(--blue); color: var(--white); }
 
   .footer-cols { display: flex; gap: 56px; flex-wrap: wrap; }
-  .footer-cols h4 { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; color: #C9CDD3; margin-bottom: 14px; }
+  .footer-cols h4 { font-family: 'Poppins', sans-serif; font-size: 13px; letter-spacing: 0.03em; color: #C4CAD2; margin-bottom: 14px; font-weight: 600; }
   .footer-cols li { margin-bottom: 9px; }
   .footer-cols a:hover { color: var(--blue-light); }
 
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
   .payment-badges { display: flex; gap: 8px; align-items: center; }
-  .payment-badges span {
-    border: 1px solid #33363c;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 11px;
-    color: #8A8F97;
-  }
+  .payment-badges span { border: 1px solid #333a44; border-radius: 6px; padding: 4px 8px; font-family: 'Roboto Mono', monospace; font-size: 11px; color: #8A929E; }
 
   /* ---------- WHATSAPP FLOAT ---------- */
   .whatsapp-float {
-    position: fixed;
-    bottom: 22px;
-    right: 22px;
-    background: #25D366;
-    color: var(--white);
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-    z-index: 200;
+    position: fixed; bottom: 22px; right: 22px;
+    background: #25D366; color: var(--white);
+    width: 56px; height: 56px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; box-shadow: 0 4px 14px rgba(0,0,0,0.25); z-index: 200;
   }
 
   @media (max-width: 900px) {
     .search-bar { display: none; }
-    .hero h1 { font-size: 32px; }
-    .hero::before { display: none; }
+    .header-inner { grid-template-columns: auto auto; }
+    .hero h1 { font-size: 30px; }
     .topbar-left { display: none; }
   }
 </style>
@@ -659,10 +403,6 @@
       <a href="#">Giriş Yap / Kayıt Ol</a>
     </div>
   </div>
-</div>
-
-<div class="promo-strip">
-  <strong>Hoş Geldin Kampanyası</strong> — Ustaların Paketi'nde hediyeler seni bekliyor · <a href="#kampanya" style="text-decoration:underline;">Detaylar</a>
 </div>
 
 <header>
@@ -685,49 +425,15 @@
   </div>
 </header>
 
-<div class="banner-slider">
-  <div class="container">
-    <div class="banner-scroll">
-      <div class="banner-slide s1">
-        <i class="fa-solid fa-spray-can-sparkles slide-icon"></i>
-        <div class="slide-text">
-          <span class="eyebrow">Yeni Sezon</span>
-          <h2>Fren bakım serisinde geniş seçenek</h2>
-          <a href="#kategoriler" class="btn btn-outline">Ürünleri Gör</a>
-        </div>
-      </div>
-      <div class="banner-slide s2">
-        <i class="fa-solid fa-truck-fast slide-icon"></i>
-        <div class="slide-text">
-          <span class="eyebrow">Adana ve Çevresi</span>
-          <h2>Aynı gün teslimat imkanı</h2>
-          <a href="#iletisim" class="btn btn-outline">Detaylı Bilgi</a>
-        </div>
-      </div>
-      <div class="banner-slide s3">
-        <i class="fa-solid fa-gift slide-icon"></i>
-        <div class="slide-text">
-          <span class="eyebrow">Hoş Geldin Kampanyası</span>
-          <h2>Ustaların Paketi'nde hediyeler seni bekliyor</h2>
-          <a href="#kampanya" class="btn btn-outline">Kampanyayı Gör</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <section class="hero">
   <div class="container hero-inner">
+    <span class="campaign-pill"><i class="fa-solid fa-gift"></i> Hoş Geldin Kampanyası</span>
     <span class="eyebrow">Otomotiv Sarf Malzemeleri</span>
     <h1>Ustanın elinden<br>eksik olmayan <span>marka.</span></h1>
     <p>Fren balata spreyinden AdBlue'ya, sıvı contadan cam suyuna kadar atölyenin ihtiyacı olan her şey — birkaç tıkla kapında.</p>
     <div class="hero-actions">
       <a href="#kategoriler" class="btn btn-primary">Ürünleri İncele</a>
       <a href="https://wa.me/905321700984" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp'tan Sipariş Ver</a>
-    </div>
-    <div class="hero-stats">
-      <div><strong>Adana</strong><span>Merkez depo</span></div>
-      <div><strong>Hızlı</strong><span>Kapıda teslim</span></div>
     </div>
   </div>
 </section>
@@ -777,42 +483,18 @@
   </div>
 </section>
 
-<section class="section" style="background:var(--white); padding-top:0;" id="kampanya">
+<section class="section" style="background:var(--white); padding-top:0;">
   <div class="container">
     <div class="section-head">
       <div>
-        <span class="eyebrow">Kampanyalar</span>
-        <h2>Şu anda geçerli fırsatlar</h2>
+        <span class="eyebrow">Öne Çıkanlar</span>
+        <h2>Atölyenin favorileri</h2>
       </div>
+      <a href="#" class="btn btn-outline">Tüm Ürünler</a>
     </div>
-    <div class="promo-banners">
-      <div class="promo-banner b1">
-        <span class="tag">Ustaların Paketi · 1</span>
-        <h3>6 koli alana 8 çift eldiven hediye</h3>
-        <a href="#" class="btn btn-outline">İncele</a>
-      </div>
-      <div class="promo-banner b2">
-        <span class="tag">Ustaların Paketi · 2</span>
-        <h3>2 koli alana 5 kg pamuklu bez hediye</h3>
-        <a href="#" class="btn btn-outline">İncele</a>
-      </div>
-      <div class="promo-banner b3">
-        <span class="tag">Ustaların Paketi · 3</span>
-        <h3>3 koli alana pas sökücü + cam suyu hediye</h3>
-        <a href="#" class="btn btn-outline">İncele</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" style="background:var(--white); padding-top:0;">
-  <div class="container">
-    <div class="section-head-inline">
-      <h3>Fren Bakım Ürünleri</h3>
-      <a href="#">Hepsini Gör <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-    <div class="carousel-row">
+    <div class="product-grid">
       <div class="product-card">
+        <span class="campaign-tag">Kampanya</span>
         <div class="product-thumb">ürün görseli</div>
         <div class="product-body">
           <span class="cat-label">Fren Bakım</span>
@@ -823,63 +505,13 @@
       <div class="product-card">
         <div class="product-thumb">ürün görseli</div>
         <div class="product-body">
-          <span class="cat-label">Fren Bakım</span>
-          <h3>Fren Balata Genel Temizleyici</h3>
-          <div class="product-foot"><div class="price">— <span>Yakında</span></div><button class="add-btn"><i class="fa-solid fa-plus"></i></button></div>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-thumb">ürün görseli</div>
-        <div class="product-body">
-          <span class="cat-label">Fren Bakım</span>
-          <h3>Fren Hidrolik Sıvısı</h3>
-          <div class="product-foot"><div class="price">— <span>Yakında</span></div><button class="add-btn"><i class="fa-solid fa-plus"></i></button></div>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-thumb">ürün görseli</div>
-        <div class="product-body">
-          <span class="cat-label">Fren Bakım</span>
-          <h3>Beybi Plus Koruyucu Eldiven</h3>
-          <div class="product-foot"><div class="price">— <span>Yakında</span></div><button class="add-btn"><i class="fa-solid fa-plus"></i></button></div>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-thumb">ürün görseli</div>
-        <div class="product-body">
-          <span class="cat-label">Fren Bakım</span>
-          <h3>404 Silikon Sprey</h3>
-          <div class="product-foot"><div class="price">— <span>Yakında</span></div><button class="add-btn"><i class="fa-solid fa-plus"></i></button></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" style="background:var(--white); padding-top:0;">
-  <div class="container">
-    <div class="section-head-inline">
-      <h3>Temizlik ve Bakım Ürünleri</h3>
-      <a href="#">Hepsini Gör <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-    <div class="carousel-row">
-      <div class="product-card">
-        <div class="product-thumb">ürün görseli</div>
-        <div class="product-body">
           <span class="cat-label">Temizlik</span>
           <h3>404 Pas Sökücü</h3>
           <div class="product-foot"><div class="price">— <span>Yakında</span></div><button class="add-btn"><i class="fa-solid fa-plus"></i></button></div>
         </div>
       </div>
       <div class="product-card">
-        <div class="product-thumb">ürün görseli</div>
-        <div class="product-body">
-          <span class="cat-label">Motor Bakım</span>
-          <h3>Susuz Motor Temizleme</h3>
-          <div class="product-foot"><div class="price">— <span>Yakında</span></div><button class="add-btn"><i class="fa-solid fa-plus"></i></button></div>
-        </div>
-      </div>
-      <div class="product-card">
+        <span class="campaign-tag">Kampanya</span>
         <div class="product-thumb">ürün görseli</div>
         <div class="product-body">
           <span class="cat-label">Soğutma Sistemi</span>
@@ -890,16 +522,8 @@
       <div class="product-card">
         <div class="product-thumb">ürün görseli</div>
         <div class="product-body">
-          <span class="cat-label">Soğutma Sistemi</span>
-          <h3>Radyatör Temizleyici</h3>
-          <div class="product-foot"><div class="price">— <span>Yakında</span></div><button class="add-btn"><i class="fa-solid fa-plus"></i></button></div>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-thumb">ürün görseli</div>
-        <div class="product-body">
-          <span class="cat-label">Yapıştırıcı / Conta</span>
-          <h3>Hızlı Yapıştırıcı</h3>
+          <span class="cat-label">Koruyucu Ekipman</span>
+          <h3>Beybi Plus Eldiven</h3>
           <div class="product-foot"><div class="price">— <span>Yakında</span></div><button class="add-btn"><i class="fa-solid fa-plus"></i></button></div>
         </div>
       </div>
@@ -914,7 +538,7 @@
         <span class="eyebrow">Neden Spraybox</span>
         <h2>İşini bilenin tercihi</h2>
       </div>
-      <p>Adana merkezli, atölye ve bayi ağına doğrudan hizmet veren bir tedarik ortağı.</p>
+      <p>Adana merkezli, atölye ağına doğrudan hizmet veren bir tedarik ortağı.</p>
     </div>
     <div class="why-grid">
       <div class="why-item">
