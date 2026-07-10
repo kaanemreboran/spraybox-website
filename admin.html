@@ -574,8 +574,28 @@
   }
 
   async function siparisDurumGuncelle(id, yeniDurum) {
+    const { data: mevcutSiparis } = await db.from('siparisler').select('durum').eq('id', id).single();
+    const oncekiDurum = mevcutSiparis ? mevcutSiparis.durum : null;
+
     const { error } = await db.from('siparisler').update({ durum: yeniDurum }).eq('id', id);
-    if (error) alert('Güncellenemedi: ' + error.message);
+    if (error) { alert('Güncellenemedi: ' + error.message); return; }
+
+    // Sipariş iptal edilince (daha önce iptal değilse) ürün stoklarını geri ekle
+    if (yeniDurum === 'İptal' && oncekiDurum !== 'İptal') {
+      const { data: kalemler, error: kalemHata } = await db.from('siparis_kalemleri').select('urun_id, adet').eq('siparis_id', id);
+      if (kalemHata) { console.error('Sipariş kalemleri okunamadı:', kalemHata); return; }
+
+      for (const kalem of (kalemler || [])) {
+        if (!kalem.urun_id) continue;
+        const { data: urunGuncel, error: urunHata } = await db.from('urunler').select('stok').eq('id', kalem.urun_id).single();
+        if (urunHata || !urunGuncel) { console.error('Ürün okunamadı:', kalem.urun_id, urunHata); continue; }
+        const yeniStok = urunGuncel.stok + kalem.adet;
+        const { error: guncelleHata } = await db.from('urunler').update({ stok: yeniStok }).eq('id', kalem.urun_id);
+        if (guncelleHata) console.error('Stok geri eklenemedi:', kalem.urun_id, guncelleHata);
+      }
+
+      urunleriGetir();
+    }
   }
 </script>
 
