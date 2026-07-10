@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sayfa Bulunamadı | Spraybox</title>
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=Anton&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --navy: #14294B; --blue: #2261A8; --blue-light: #5E9AE0;
+    --steel: #EEF1F4; --asphalt: #1B2027; --white: #FFFFFF; --text-muted: #9AA2AE;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(150deg, var(--asphalt) 0%, var(--navy) 100%);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  body::after {
+    content: "";
+    position: absolute; right: -100px; top: -100px;
+    width: 420px; height: 420px; border-radius: 50%;
+    border: 60px solid rgba(94,154,224,0.08);
+  }
+  .wrap { position: relative; z-index: 2; max-width: 460px; }
+  .logo { height: 56px; margin: 0 auto 28px; }
+  .code { font-family: 'Anton', sans-serif; font-size: 90px; color: var(--blue-light); line-height: 1; margin-bottom: 8px; }
+  h1 { font-family: 'Poppins', sans-serif; font-size: 22px; margin-bottom: 12px; }
+  p { color: #C4CAD2; font-size: 15px; margin-bottom: 30px; line-height: 1.6; }
+  .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 8px;
+    font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500;
+    border: 1.5px solid transparent;
+  }
+  .btn-primary { background: var(--blue); color: var(--white); }
+  .btn-primary:hover { background: #1a4a86; }
+  .btn-outline { border-color: rgba(255,255,255,0.4); color: var(--white); }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); }
+  a { text-decoration: none; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <img src="logo.png" alt="Spraybox" class="logo">
+    <div class="code">404</div>
+    <h1>Bu sayfa bulunamadı</h1>
+    <p>Aradığın sayfa kaldırılmış, adı değişmiş veya hiç var olmamış olabilir. Endişelenme, seni doğru yere yönlendirelim.</p>
+    <div class="actions">
+      <a href="index.html" class="btn btn-primary"><i class="fa-solid fa-house"></i> Anasayfaya Dön</a>
+      <a href="urunler.html" class="btn btn-outline"><i class="fa-solid fa-box-open"></i> Ürünlere Göz At</a>
+    </div>
+  </div>
+</body>
+</html>
