@@ -133,3 +133,52 @@ function sepetBildirimGoster(mesaj, hataMi) {
 }
 
 document.addEventListener('DOMContentLoaded', sepetRozetiGuncelle);
+
+// ============================================
+// SPRAYBOX ÜYELİK / OTURUM MANTIĞI
+// ============================================
+const MUSTERI_KEY = 'spraybox_musteri';
+
+function musteriGetir() {
+  try { return JSON.parse(localStorage.getItem(MUSTERI_KEY)); }
+  catch { return null; }
+}
+
+function musteriGirisYap(musteri) {
+  localStorage.setItem(MUSTERI_KEY, JSON.stringify(musteri));
+  authAlaniniGuncelle();
+}
+
+function musteriCikisYap() {
+  localStorage.removeItem(MUSTERI_KEY);
+  window.location.href = 'index.html';
+}
+
+async function sha256Hesapla(metin) {
+  const veri = new TextEncoder().encode(metin);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', veri);
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function authAlaniniGuncelle() {
+  const musteri = musteriGetir();
+  const headerActions = document.querySelector('.header-actions');
+  if (!headerActions) return;
+
+  const kayitBtn = headerActions.querySelector('a.btn-outline');
+  const girisBtn = headerActions.querySelector('a.btn-primary');
+  if (!kayitBtn || !girisBtn) return;
+
+  if (musteri) {
+    kayitBtn.style.display = 'none';
+    girisBtn.innerHTML = '<i class="fa-solid fa-user"></i> ' + musteri.ad_soyad.split(' ')[0];
+    girisBtn.href = 'hesabim.html';
+  } else {
+    kayitBtn.style.display = '';
+    kayitBtn.href = 'kayit.html';
+    girisBtn.innerHTML = 'Giriş Yap';
+    girisBtn.href = 'giris.html';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', authAlaniniGuncelle);
