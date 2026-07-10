@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spraybox | Yönetim Paneli</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --navy: #14294B; --blue: #2261A8; --blue-light: #5E9AE0; --red: #D31E25;
+    --steel: #EEF1F4; --steel-dark: #DBE0E5; --asphalt: #1B2027; --white: #FFFFFF;
+    --text-muted: #667080; --green: #1E9E5A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--steel); color: var(--asphalt); line-height: 1.5; }
+  h1, h2, h3 { font-family: 'Poppins', sans-serif; font-weight: 600; }
+  button { font-family: inherit; cursor: pointer; }
+  input, select, textarea { font-family: 'Inter', sans-serif; }
+
+  /* ---------- GİRİŞ EKRANI ---------- */
+  #login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(150deg, var(--asphalt) 0%, var(--navy) 100%);
+  }
+
+  .login-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .login-card img { height: 56px; margin: 0 auto 20px; display: block; }
+  .login-card h1 { font-size: 20px; text-align: center; color: var(--navy); margin-bottom: 6px; }
+  .login-card p.sub { text-align: center; color: var(--text-muted); font-size: 13px; margin-bottom: 26px; }
+
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 6px; }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    border: 1px solid var(--steel-dark);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-size: 14px;
+    outline: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--blue); }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 11px 22px; border-radius: 8px; font-family: 'Poppins', sans-serif;
+    font-size: 14px; font-weight: 500; border: 1.5px solid transparent; width: 100%;
+  }
+  .btn-primary { background: var(--blue); color: var(--white); }
+  .btn-primary:hover { background: var(--navy); }
+  .login-error { color: var(--red); font-size: 13px; margin-top: 12px; text-align: center; display: none; }
+
+  /* ---------- PANEL ---------- */
+  #panel { display: none; }
+
+  .topbar {
+    background: var(--navy); color: var(--white);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 12px; }
+  .topbar-left img { height: 32px; }
+  .topbar-left span { font-family: 'Poppins', sans-serif; font-weight: 600; }
+  .logout-btn { background: rgba(255,255,255,0.12); color: var(--white); border: none; border-radius: 6px; padding: 8px 14px; font-size: 13px; }
+  .logout-btn:hover { background: rgba(255,255,255,0.2); }
+
+  .tabs { display: flex; gap: 4px; background: var(--white); border-bottom: 1px solid var(--steel-dark); padding: 0 24px; }
+  .tab-btn {
+    background: none; border: none; padding: 14px 18px; font-family: 'Poppins', sans-serif;
+    font-size: 14px; font-weight: 500; color: var(--text-muted); border-bottom: 3px solid transparent;
+  }
+  .tab-btn.active { color: var(--navy); border-bottom-color: var(--blue); }
+
+  .tab-content { display: none; padding: 28px 24px; max-width: 1180px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+
+  .panel-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .panel-head h2 { font-size: 20px; color: var(--navy); }
+
+  .card { background: var(--white); border: 1px solid var(--steel-dark); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-muted); padding: 10px 12px; border-bottom: 2px solid var(--steel-dark); }
+  td { padding: 12px; border-bottom: 1px solid var(--steel-dark); font-size: 14px; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+  .badge-green { background: #E3F5EA; color: var(--green); }
+  .badge-gray { background: var(--steel); color: var(--text-muted); }
+  .badge-red { background: #FBE4E4; color: var(--red); }
+
+  .icon-action { background: none; border: none; color: var(--text-muted); font-size: 15px; padding: 6px 8px; border-radius: 6px; }
+  .icon-action:hover { background: var(--steel); color: var(--navy); }
+  .icon-action.danger:hover { color: var(--red); }
+
+  .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .form-grid .full { grid-column: 1 / -1; }
+  .checkbox-row { display: flex; align-items: center; gap: 8px; }
+  .checkbox-row input { width: auto; }
+
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(20,41,75,0.5);
+    align-items: center; justify-content: center; z-index: 500; padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal { background: var(--white); border-radius: 14px; padding: 28px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; }
+  .modal h3 { font-size: 18px; color: var(--navy); margin-bottom: 20px; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 22px; }
+  .btn-outline { background: transparent; border: 1.5px solid var(--steel-dark); color: var(--navy); }
+  .btn-outline:hover { background: var(--steel); }
+
+  .add-fab {
+    background: var(--blue); color: var(--white); border: none; border-radius: 8px;
+    padding: 10px 18px; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .add-fab:hover { background: var(--navy); }
+
+  .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+  .empty-state i { font-size: 28px; margin-bottom: 10px; display: block; }
+
+  select.status-select {
+    border: 1px solid var(--steel-dark); border-radius: 6px; padding: 6px 10px; font-size: 13px;
+  }
+
+  @media (max-width: 700px) {
+    .form-grid { grid-template-columns: 1fr; }
+    table, thead, tbody, th, td, tr { display: block; }
+    thead { display: none; }
+    tr { border-bottom: 1px solid var(--steel-dark); padding: 10px 0; }
+    td { border: none; padding: 4px 12px; display: flex; justify-content: space-between; gap: 12px; }
+    td::before { content: attr(data-label); font-weight: 600; color: var(--text-muted); font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-card">
+    <img src="logo.png" alt="Spraybox">
+    <h1>Yönetim Paneli</h1>
+    <p class="sub">Devam etmek için giriş yap</p>
+    <div class="field">
+      <label>Kullanıcı Adı</label>
+      <input type="text" id="login-user" placeholder="admin">
+    </div>
+    <div class="field">
+      <label>Şifre</label>
+      <input type="password" id="login-pass" placeholder="••••••••">
+    </div>
+    <button class="btn btn-primary" onclick="girisYap()">Giriş Yap</button>
+    <p class="login-error" id="login-error">Kullanıcı adı veya şifre hatalı.</p>
+  </div>
+</div>
+
+<div id="panel">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img src="logo.png" alt="Spraybox">
+      <span>Yönetim Paneli</span>
+    </div>
+    <button class="logout-btn" onclick="cikisYap()"><i class="fa-solid fa-right-from-bracket"></i> Çıkış Yap</button>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="urunler-tab" onclick="tabAc('urunler-tab', this)">Ürünler</button>
+    <button class="tab-btn" data-tab="kategoriler-tab" onclick="tabAc('kategoriler-tab', this)">Kategoriler</button>
+    <button class="tab-btn" data-tab="siparisler-tab" onclick="tabAc('siparisler-tab', this)">Siparişler</button>
+  </div>
+
+  <!-- ÜRÜNLER -->
+  <div class="tab-content active" id="urunler-tab">
+    <div class="panel-head">
+      <h2>Ürünler</h2>
+      <button class="add-fab" onclick="urunModalAc()"><i class="fa-solid fa-plus"></i> Yeni Ürün</button>
+    </div>
+    <div class="card" style="padding:0; overflow-x:auto;">
+      <table>
+        <thead>
+          <tr><th>Ürün</th><th>Kategori</th><th>Fiyat</th><th>Stok</th><th>Durum</th><th></th></tr>
+        </thead>
+        <tbody id="urun-tablo"></tbody>
+      </table>
+      <div class="empty-state" id="urun-bos" style="display:none;">
+        <i class="fa-solid fa-box-open"></i>
+        Henüz ürün eklenmedi. "Yeni Ürün" ile başla.
+      </div>
+    </div>
+  </div>
+
+  <!-- KATEGORİLER -->
+  <div class="tab-content" id="kategoriler-tab">
+    <div class="panel-head">
+      <h2>Kategoriler</h2>
+      <button class="add-fab" onclick="katModalAc()"><i class="fa-solid fa-plus"></i> Yeni Kategori</button>
+    </div>
+    <div class="card" style="padding:0; overflow-x:auto;">
+      <table>
+        <thead><tr><th>Sıra</th><th>Kategori</th><th>Açıklama</th><th>İkon</th><th></th></tr></thead>
+        <tbody id="kategori-tablo"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SİPARİŞLER -->
+  <div class="tab-content" id="siparisler-tab">
+    <div class="panel-head"><h2>Siparişler</h2></div>
+    <div class="card" style="padding:0; overflow-x:auto;">
+      <table>
+        <thead><tr><th>Tarih</th><th>Müşteri</th><th>Telefon</th><th>Tutar</th><th>Ödeme</th><th>Durum</th></tr></thead>
+        <tbody id="siparis-tablo"></tbody>
+      </table>
+      <div class="empty-state" id="siparis-bos" style="display:none;">
+        <i class="fa-solid fa-receipt"></i>
+        Henüz sipariş yok.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ÜRÜN MODAL -->
+<div class="modal-overlay" id="urun-modal">
+  <div class="modal">
+    <h3 id="urun-modal-title">Yeni Ürün</h3>
+    <input type="hidden" id="urun-id">
+    <div class="form-grid">
+      <div class="field full">
+        <label>Ürün Adı</label>
+        <input type="text" id="urun-ad" placeholder="Sibax Balata Sprey">
+      </div>
+      <div class="field">
+        <label>Kategori</label>
+        <select id="urun-kategori"></select>
+      </div>
+      <div class="field">
+        <label>Fiyat (TL)</label>
+        <input type="number" id="urun-fiyat" step="0.01" placeholder="0.00">
+      </div>
+      <div class="field">
+        <label>Stok</label>
+        <input type="number" id="urun-stok" placeholder="0">
+      </div>
+      <div class="field">
+        <label>Görsel URL (opsiyonel)</label>
+        <input type="text" id="urun-resim" placeholder="https://...">
+      </div>
+      <div class="field full">
+        <label>Açıklama (opsiyonel)</label>
+        <textarea id="urun-aciklama" rows="2"></textarea>
+      </div>
+      <div class="field checkbox-row"><input type="checkbox" id="urun-kampanyali"><label>Kampanyalı ürün</label></div>
+      <div class="field checkbox-row"><input type="checkbox" id="urun-aktif" checked><label>Sitede görünsün (aktif)</label></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" style="flex:1;" onclick="modalKapat('urun-modal')">Vazgeç</button>
+      <button class="btn btn-primary" style="flex:1;" onclick="urunKaydet()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<!-- KATEGORİ MODAL -->
+<div class="modal-overlay" id="kategori-modal">
+  <div class="modal">
+    <h3 id="kategori-modal-title">Yeni Kategori</h3>
+    <input type="hidden" id="kategori-id">
+    <div class="form-grid">
+      <div class="field full">
+        <label>Kategori Adı</label>
+        <input type="text" id="kategori-ad" placeholder="Fren Bakım">
+      </div>
+      <div class="field full">
+        <label>Açıklama</label>
+        <input type="text" id="kategori-aciklama" placeholder="Balata spreyi, temizleyici">
+      </div>
+      <div class="field">
+        <label>İkon (Font Awesome class)</label>
+        <input type="text" id="kategori-ikon" placeholder="fa-solid fa-car-burst">
+      </div>
+      <div class="field">
+        <label>Sıra</label>
+        <input type="number" id="kategori-sira" placeholder="1">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" style="flex:1;" onclick="modalKapat('kategori-modal')">Vazgeç</button>
+      <button class="btn btn-primary" style="flex:1;" onclick="kategoriKaydet()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = 'https://gbwvmemujyuevaiduyzp.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdid3ZtZW11anl1ZXZhaWR1eXpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NTI3NzMsImV4cCI6MjA5OTIyODc3M30.9k_NFrw00zerGJ61Vzyeqdv4arXsaSAR1YfYsWwUeqs';
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  let kategorilerCache = [];
+
+  // ---------- GİRİŞ ----------
+  async function sha256(metin) {
+    const veri = new TextEncoder().encode(metin);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', veri);
+    return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function girisYap() {
+    const kullanici = document.getElementById('login-user').value.trim();
+    const sifre = document.getElementById('login-pass').value;
+    const hata = document.getElementById('login-error');
+    hata.style.display = 'none';
+
+    if (!kullanici || !sifre) { hata.textContent = 'Kullanıcı adı ve şifre gerekli.'; hata.style.display = 'block'; return; }
+
+    const sifreHash = await sha256(sifre);
+    const { data, error } = await db.from('yoneticiler').select('*').eq('kullanici_adi', kullanici).single();
+
+    if (error || !data || data.sifre_hash !== sifreHash) {
+      hata.textContent = 'Kullanıcı adı veya şifre hatalı.';
+      hata.style.display = 'block';
+      return;
+    }
+
+    sessionStorage.setItem('spraybox_admin', kullanici);
+    girisEkraniniGizle();
+  }
+
+  function girisEkraniniGizle() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('panel').style.display = 'block';
+    kategorileriGetir();
+    urunleriGetir();
+    siparisleriGetir();
+  }
+
+  function cikisYap() {
+    sessionStorage.removeItem('spraybox_admin');
+    location.reload();
+  }
+
+  if (sessionStorage.getItem('spraybox_admin')) {
+    document.addEventListener('DOMContentLoaded', girisEkraniniGizle);
+  }
+
+  // ---------- SEKME GEÇİŞİ ----------
+  function tabAc(tabId, btn) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function modalAc(id) { document.getElementById(id).classList.add('active'); }
+  function modalKapat(id) { document.getElementById(id).classList.remove('active'); }
+
+  // ---------- KATEGORİLER ----------
+  async function kategorileriGetir() {
+    const { data, error } = await db.from('kategoriler').select('*').order('sira', { ascending: true });
+    if (error) { console.error(error); return; }
+    kategorilerCache = data || [];
+
+    const tablo = document.getElementById('kategori-tablo');
+    tablo.innerHTML = kategorilerCache.map(k => `
+      <tr>
+        <td data-label="Sıra">${k.sira ?? '-'}</td>
+        <td data-label="Kategori"><strong>${k.ad}</strong></td>
+        <td data-label="Açıklama">${k.aciklama || '-'}</td>
+        <td data-label="İkon"><i class="${k.ikon || ''}"></i> <span class="mono" style="font-size:12px;color:var(--text-muted);">${k.ikon || ''}</span></td>
+        <td data-label="">
+          <button class="icon-action" onclick="katDuzenle('${k.id}')" aria-label="Düzenle"><i class="fa-solid fa-pen"></i></button>
+          <button class="icon-action danger" onclick="katSil('${k.id}')" aria-label="Sil"><i class="fa-solid fa-trash"></i></button>
+        </td>
+      </tr>
+    `).join('');
+
+    const select = document.getElementById('urun-kategori');
+    select.innerHTML = kategorilerCache.map(k => `<option value="${k.id}">${k.ad}</option>`).join('');
+  }
+
+  function katModalAc() {
+    document.getElementById('kategori-modal-title').textContent = 'Yeni Kategori';
+    document.getElementById('kategori-id').value = '';
+    document.getElementById('kategori-ad').value = '';
+    document.getElementById('kategori-aciklama').value = '';
+    document.getElementById('kategori-ikon').value = '';
+    document.getElementById('kategori-sira').value = kategorilerCache.length + 1;
+    modalAc('kategori-modal');
+  }
+
+  function katDuzenle(id) {
+    const k = kategorilerCache.find(x => x.id === id);
+    if (!k) return;
+    document.getElementById('kategori-modal-title').textContent = 'Kategoriyi Düzenle';
+    document.getElementById('kategori-id').value = k.id;
+    document.getElementById('kategori-ad').value = k.ad;
+    document.getElementById('kategori-aciklama').value = k.aciklama || '';
+    document.getElementById('kategori-ikon').value = k.ikon || '';
+    document.getElementById('kategori-sira').value = k.sira || 0;
+    modalAc('kategori-modal');
+  }
+
+  async function kategoriKaydet() {
+    const id = document.getElementById('kategori-id').value;
+    const ad = document.getElementById('kategori-ad').value.trim();
+    if (!ad) { alert('Kategori adı gerekli.'); return; }
+
+    const slug = ad.toLocaleLowerCase('tr-TR')
+      .replace(/ı/g, 'i').replace(/ş/g, 's').replace(/ğ/g, 'g')
+      .replace(/ü/g, 'u').replace(/ö/g, 'o').replace(/ç/g, 'c')
+      .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+    const payload = {
+      ad,
+      slug,
+      aciklama: document.getElementById('kategori-aciklama').value.trim(),
+      ikon: document.getElementById('kategori-ikon').value.trim(),
+      sira: parseInt(document.getElementById('kategori-sira').value) || 0
+    };
+
+    const { error } = id
+      ? await db.from('kategoriler').update(payload).eq('id', id)
+      : await db.from('kategoriler').insert(payload);
+
+    if (error) { alert('Kaydedilemedi: ' + error.message); return; }
+    modalKapat('kategori-modal');
+    kategorileriGetir();
+  }
+
+  async function katSil(id) {
+    if (!confirm('Bu kategoriyi silmek istediğine emin misin? Bu kategorideki ürünler kategorisiz kalır.')) return;
+    const { error } = await db.from('kategoriler').delete().eq('id', id);
+    if (error) { alert('Silinemedi: ' + error.message); return; }
+    kategorileriGetir();
+  }
+
+  // ---------- ÜRÜNLER ----------
+  let urunlerCache = [];
+
+  async function urunleriGetir() {
+    const { data, error } = await db.from('urunler').select('*, kategoriler(ad)').order('created_at', { ascending: false });
+    if (error) { console.error(error); return; }
+    urunlerCache = data || [];
+
+    const tablo = document.getElementById('urun-tablo');
+    const bos = document.getElementById('urun-bos');
+
+    if (urunlerCache.length === 0) {
+      tablo.innerHTML = '';
+      bos.style.display = 'block';
+      return;
+    }
+    bos.style.display = 'none';
+
+    tablo.innerHTML = urunlerCache.map(u => `
+      <tr>
+        <td data-label="Ürün"><strong>${u.ad}</strong>${u.kampanyali ? ' <span class="badge badge-red">Kampanya</span>' : ''}</td>
+        <td data-label="Kategori">${u.kategoriler ? u.kategoriler.ad : '-'}</td>
+        <td data-label="Fiyat">${Number(u.fiyat).toLocaleString('tr-TR', {minimumFractionDigits:2})} TL</td>
+        <td data-label="Stok">${u.stok}</td>
+        <td data-label="Durum">${u.aktif ? '<span class="badge badge-green">Aktif</span>' : '<span class="badge badge-gray">Pasif</span>'}</td>
+        <td data-label="">
+          <button class="icon-action" onclick="urunDuzenle('${u.id}')" aria-label="Düzenle"><i class="fa-solid fa-pen"></i></button>
+          <button class="icon-action danger" onclick="urunSil('${u.id}')" aria-label="Sil"><i class="fa-solid fa-trash"></i></button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function urunModalAc() {
+    document.getElementById('urun-modal-title').textContent = 'Yeni Ürün';
+    document.getElementById('urun-id').value = '';
+    document.getElementById('urun-ad').value = '';
+    document.getElementById('urun-fiyat').value = '';
+    document.getElementById('urun-stok').value = '';
+    document.getElementById('urun-resim').value = '';
+    document.getElementById('urun-aciklama').value = '';
+    document.getElementById('urun-kampanyali').checked = false;
+    document.getElementById('urun-aktif').checked = true;
+    modalAc('urun-modal');
+  }
+
+  function urunDuzenle(id) {
+    const u = urunlerCache.find(x => x.id === id);
+    if (!u) return;
+    document.getElementById('urun-modal-title').textContent = 'Ürünü Düzenle';
+    document.getElementById('urun-id').value = u.id;
+    document.getElementById('urun-ad').value = u.ad;
+    document.getElementById('urun-kategori').value = u.kategori_id || '';
+    document.getElementById('urun-fiyat').value = u.fiyat;
+    document.getElementById('urun-stok').value = u.stok;
+    document.getElementById('urun-resim').value = u.resim_url || '';
+    document.getElementById('urun-aciklama').value = u.aciklama || '';
+    document.getElementById('urun-kampanyali').checked = u.kampanyali;
+    document.getElementById('urun-aktif').checked = u.aktif;
+    modalAc('urun-modal');
+  }
+
+  async function urunKaydet() {
+    const id = document.getElementById('urun-id').value;
+    const ad = document.getElementById('urun-ad').value.trim();
+    if (!ad) { alert('Ürün adı gerekli.'); return; }
+
+    const payload = {
+      ad,
+      kategori_id: document.getElementById('urun-kategori').value || null,
+      fiyat: parseFloat(document.getElementById('urun-fiyat').value) || 0,
+      stok: parseInt(document.getElementById('urun-stok').value) || 0,
+      resim_url: document.getElementById('urun-resim').value.trim() || null,
+      aciklama: document.getElementById('urun-aciklama').value.trim(),
+      kampanyali: document.getElementById('urun-kampanyali').checked,
+      aktif: document.getElementById('urun-aktif').checked
+    };
+
+    const { error } = id
+      ? await db.from('urunler').update(payload).eq('id', id)
+      : await db.from('urunler').insert(payload);
+
+    if (error) { alert('Kaydedilemedi: ' + error.message); return; }
+    modalKapat('urun-modal');
+    urunleriGetir();
+  }
+
+  async function urunSil(id) {
+    if (!confirm('Bu ürünü silmek istediğine emin misin?')) return;
+    const { error } = await db.from('urunler').delete().eq('id', id);
+    if (error) { alert('Silinemedi: ' + error.message); return; }
+    urunleriGetir();
+  }
+
+  // ---------- SİPARİŞLER ----------
+  async function siparisleriGetir() {
+    const { data, error } = await db.from('siparisler').select('*').order('created_at', { ascending: false });
+    if (error) { console.error(error); return; }
+
+    const tablo = document.getElementById('siparis-tablo');
+    const bos = document.getElementById('siparis-bos');
+
+    if (!data || data.length === 0) {
+      tablo.innerHTML = '';
+      bos.style.display = 'block';
+      return;
+    }
+    bos.style.display = 'none';
+
+    const durumlar = ['Yeni','Onaylandı','Hazırlanıyor','Kargoda','Teslim Edildi','İptal'];
+
+    tablo.innerHTML = data.map(s => `
+      <tr>
+        <td data-label="Tarih">${new Date(s.created_at).toLocaleDateString('tr-TR')}</td>
+        <td data-label="Müşteri">${s.musteri_adi}</td>
+        <td data-label="Telefon">${s.telefon}</td>
+        <td data-label="Tutar">${Number(s.toplam_tutar).toLocaleString('tr-TR', {minimumFractionDigits:2})} TL</td>
+        <td data-label="Ödeme">${s.odeme_yontemi}</td>
+        <td data-label="Durum">
+          <select class="status-select" onchange="siparisDurumGuncelle('${s.id}', this.value)">
+            ${durumlar.map(d => `<option value="${d}" ${d === s.durum ? 'selected' : ''}>${d}</option>`).join('')}
+          </select>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  async function siparisDurumGuncelle(id, yeniDurum) {
+    const { error } = await db.from('siparisler').update({ durum: yeniDurum }).eq('id', id);
+    if (error) alert('Güncellenemedi: ' + error.message);
+  }
+</script>
+
+</body>
+</html>
