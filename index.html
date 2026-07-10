@@ -798,12 +798,14 @@
           </a>
           <div class="product-foot">
             <div class="price">${tlFormat(urun.fiyat)}</div>
+            ${urun.stok > 0 ? `
             <button class="add-btn" aria-label="Sepete ekle"
               data-id="${urun.id}" data-ad="${urun.ad.replace(/"/g, '&quot;')}"
               data-fiyat="${urun.fiyat}" data-resim="${urun.resim_url || ''}"
+              data-stok="${urun.stok}"
               data-kategori="${urun.kategoriler ? urun.kategoriler.ad.replace(/"/g, '&quot;') : ''}">
               <i class="fa-solid fa-plus"></i>
-            </button>
+            </button>` : `<span style="font-size:11px; color:var(--red); font-weight:600;">Stokta Yok</span>`}
           </div>
         </div>
       </div>
@@ -816,7 +818,8 @@
           ad: btn.dataset.ad,
           fiyat: parseFloat(btn.dataset.fiyat),
           resim_url: btn.dataset.resim,
-          kategori: btn.dataset.kategori
+          kategori: btn.dataset.kategori,
+          stok: parseInt(btn.dataset.stok)
         });
       });
     });
